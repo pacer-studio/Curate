@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirakl + Shopify Plus: Technical Approach - Reem Mall / Curate</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --surface: #ffffff;
+      --surface-warm: #faf8f4;
+      --surface-deep: #f0ede7;
+      --border: rgba(30, 25, 15, 0.10);
+      --border-strong: rgba(30, 25, 15, 0.20);
+      --text: #1a1714;
+      --text-dim: #5c5648;
+      --text-muted: #8a8070;
+      --navy: #1e2d40;
+      --navy-light: #2c4260;
+      --gold: #b8862a;
+      --gold-light: #d4a73a;
+      --gold-pale: #f5edd6;
+      --gold-pale-2: #eee3c2;
+      --teal: #1a6b6b;
+      --teal-light: #2a9090;
+      --teal-pale: #e0f0f0;
+      --rose: #8c2b2b;
+      --rose-pale: #f5e8e8;
+      --sage: #3d6b45;
+      --sage-pale: #e5f0e7;
+      --amber: #b05a1a;
+      --amber-pale: #faeade;
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* Background texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(184, 134, 42, 0.04) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 80%, rgba(30, 45, 64, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* ─── HEADER ─── */
+    .page-header {
+      background: var(--navy);
+      margin: 0 -2rem 3rem;
+      padding: 3.5rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(184, 134, 42, 0.08));
+      pointer-events: none;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+    }
+
+    .header-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .header-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+
+    .header-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .header-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 620px;
+      font-weight: 300;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.05em;
+    }
+
+    .meta-item strong {
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+
+    /* ─── SECTION LABELS ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-label--navy::before { background: var(--navy); }
+    .section-label--gold::before { background: var(--gold); }
+    .section-label--teal::before { background: var(--teal); }
+    .section-label--sage::before { background: var(--sage); }
+    .section-label--rose::before { background: var(--rose); }
+    .section-label--amber::before { background: var(--amber); }
+
+    /* ─── LEAD ─── */
+    .lead-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      border-radius: 0 4px 4px 0;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .lead-block p {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .lead-block p + p { margin-top: 1rem; }
+
+    /* ─── CARDS ─── */
+    .ve-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .ve-card--hero {
+      background: var(--navy);
+      color: #fff;
+      border-color: transparent;
+      padding: 2.5rem;
+    }
+
+    .ve-card--gold-tint {
+      background: var(--gold-pale);
+      border-color: var(--gold-pale-2);
+    }
+
+    .ve-card--teal-tint {
+      background: var(--teal-pale);
+      border-color: rgba(26, 107, 107, 0.20);
+    }
+
+    .ve-card--sage-tint {
+      background: var(--sage-pale);
+      border-color: rgba(61, 107, 69, 0.20);
+    }
+
+    .ve-card--rose-tint {
+      background: var(--rose-pale);
+      border-color: rgba(140, 43, 43, 0.20);
+    }
+
+    .ve-card--amber-tint {
+      background: var(--amber-pale);
+      border-color: rgba(176, 90, 26, 0.20);
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .section-intro {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      margin-bottom: 1.75rem;
+      max-width: 750px;
+      line-height: 1.7;
+    }
+
+    /* ─── CONCERN RESPONSE GRID ─── */
+    .concern-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .concern-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 3px 1fr;
+    }
+
+    .concern-item::before {
+      content: '';
+      background: var(--navy);
+    }
+
+    .concern-item.addressed::before { background: var(--teal); }
+    .concern-item.clarified::before { background: var(--gold); }
+    .concern-item.valid::before { background: var(--amber); }
+
+    .concern-inner {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .concern-q {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .concern-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .badge--correct { background: var(--teal-pale); color: var(--teal); }
+    .badge--design { background: var(--gold-pale); color: var(--gold); }
+    .badge--valid { background: var(--amber-pale); color: var(--amber); }
+    .badge--shopify { background: var(--sage-pale); color: var(--sage); }
+
+    .concern-a {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .concern-a strong { color: var(--text); font-weight: 600; }
+
+    /* ─── OWNERSHIP TABLE ─── */
+    .ownership-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .ownership-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .ownership-table thead tr {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .ownership-table thead th {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .ownership-table tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ownership-table tbody tr:last-child { border-bottom: none; }
+
+    .ownership-table tbody tr:nth-child(even) {
+      background: var(--surface-warm);
+    }
+
+    .ownership-table tbody tr:hover {
+      background: var(--gold-pale);
+      transition: background 0.15s ease;
+    }
+
+    .ownership-table td {
+      padding: 0.85rem 1.25rem;
+      vertical-align: middle;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .ownership-table td:first-child {
+      font-weight: 600;
+      color: var(--navy);
+      min-width: 180px;
+    }
+
+    .owner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    .owner--mirakl { background: var(--teal-pale); color: var(--teal); }
+    .owner--shopify { background: var(--sage-pale); color: var(--sage); }
+    .owner--connector { background: var(--gold-pale); color: var(--gold); }
+    .owner--unchanged { background: var(--surface-deep); color: var(--text-muted); }
+
+    .owner-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .owner--mirakl::before { background: var(--teal); }
+    .owner--shopify::before { background: var(--sage); }
+    .owner--connector::before { background: var(--gold); }
+    .owner--unchanged::before { background: var(--text-muted); }
+
+    /* ─── MERMAID ─── */
+    .mermaid-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .mermaid-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mermaid-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .zoom-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.25rem;
+      z-index: 10;
+    }
+
+    .zoom-btn {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      color: var(--text-dim);
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .zoom-btn:hover { background: var(--surface-deep); }
+
+    /* ─── CAPABILITY GRID ─── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .cap-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .cap-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cap-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .cap-body {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ─── PATH FORWARD ─── */
+    .path-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .path-grid { grid-template-columns: 1fr; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .cap-card[style*="span 2"] { grid-column: span 1 !important; }
+    }
+
+    .path-phase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .phase-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .phase-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+    }
+
+    .phase-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .phase-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .phase-item {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      margin-bottom: 0.6rem;
+      line-height: 1.55;
+    }
+
+    .phase-item::before {
+      content: '→';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+    }
+
+    /* ─── CALLOUT ─── */
+    .callout {
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      border: 1px solid;
+    }
+
+    .callout--key {
+      background: var(--navy);
+      border-color: transparent;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .callout--key strong { color: var(--gold-light); }
+
+    .callout--info {
+      background: var(--gold-pale);
+      border-color: var(--gold-pale-2);
+      color: var(--text);
+    }
+
+    .callout--info strong { color: var(--gold); }
+
+    .callout--affirm {
+      background: var(--teal-pale);
+      border-color: rgba(26,107,107,0.2);
+      color: var(--text);
+    }
+
+    .callout--affirm strong { color: var(--teal); }
+
+    /* ─── SOURCE REFS ─── */
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .source-list li {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .source-list li::before {
+      content: '↗';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+    }
+
+    .source-list a {
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      word-break: break-all;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-brand strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section:nth-child(1) { animation-delay: 0.05s; }
+    .section:nth-child(2) { animation-delay: 0.1s; }
+    .section:nth-child(3) { animation-delay: 0.15s; }
+    .section:nth-child(4) { animation-delay: 0.2s; }
+    .section:nth-child(5) { animation-delay: 0.25s; }
+    .section:nth-child(6) { animation-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .section, .ve-card, .lead-block { animation: none !important; }
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      background: var(--surface-deep);
+      color: var(--navy);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+
+    p + p { margin-top: 0.75rem; }
+
+    /* ─── FLOATING NAV ─── */
+    #float-nav {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 1px solid #e2e4e7;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 1.1rem 1.2rem 1.1rem 1rem;
+      width: 200px;
+      z-index: 999;
+      transition: opacity 0.2s;
+    }
+    #float-nav .fn-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8a8f98;
+      margin-bottom: 0.75rem;
+    }
+    #float-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    #float-nav ul li {
+      margin-bottom: 0.1rem;
+    }
+    #float-nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #4a5568;
+      text-decoration: none;
+      padding: 0.32rem 0.4rem;
+      border-radius: 5px;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1.3;
+    }
+    #float-nav ul li a:hover {
+      background: #f3f4f6;
+      color: #1e2d40;
+    }
+    #float-nav ul li a.fn-active {
+      background: #1e2d40;
+      color: #fff;
+    }
+    #float-nav ul li a .fn-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    #float-nav ul li a.fn-active .fn-dot {
+      opacity: 1;
+      background: #b8862a;
+    }
+    #float-nav .fn-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+    #float-nav .fn-toggle-icon {
+      font-size: 0.75rem;
+      color: #8a8f98;
+      transition: transform 0.2s;
+    }
+    #float-nav.collapsed .fn-toggle-icon {
+      transform: rotate(180deg);
+    }
+    #float-nav.collapsed ul {
+      display: none;
+    }
+    #float-nav.collapsed {
+      width: auto;
+      min-width: 120px;
+    }
+    @media (max-width: 1200px) {
+      #float-nav { display: none; }
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="page-wrap">
+
+  <!-- FLOATING NAV PANEL -->
+  <nav id="float-nav">
+    <div class="fn-toggle" onclick="toggleFloatNav()">
+      <div class="fn-label" style="margin-bottom:0">Contents</div>
+      <span class="fn-toggle-icon">▲</span>
+    </div>
+    <ul style="margin-top:0.75rem;">
+      <li><a href="#sec-architecture"><span class="fn-dot"></span>Architecture</a></li>
+      <li><a href="#sec-diagram"><span class="fn-dot"></span>Integration diagram</a></li>
+      <li><a href="#sec-ownership"><span class="fn-dot"></span>Who owns what</a></li>
+      <li><a href="#sec-capabilities"><span class="fn-dot"></span>Shopify Plus capabilities</a></li>
+      <li><a href="#sec-questions"><span class="fn-dot"></span>Questions</a></li>
+      <li><a href="#sec-path"><span class="fn-dot"></span>Path forward</a></li>
+      <li><a href="#sec-sources"><span class="fn-dot"></span>Sources</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-eyebrow">Pacer Studio · Technical Approach · Reem Mall / Curate</div>
+    <h1 class="header-title">Mirakl <em>stays.</em> SAP goes. Shopify Plus bridges the gap.</h1>
+    <p class="header-subtitle">A technical overview of the two-platform architecture for Reem Mall / Curate: system ownership, integration approach, and Shopify Plus capabilities.</p>
+    <div class="header-meta">
+      <span class="meta-item"><strong>Client:</strong> Reem Mall / Curate</span>
+      <span class="meta-item"><strong>Prepared by:</strong> Pacer Studio</span>
+      <span class="meta-item"><strong>Date:</strong> March 2026</span>
+      <span class="meta-item"><strong>Focus:</strong> Shopify Plus and Mirakl Integration Architecture</span>
+    </div>
+  </header>
+
+  <!-- CONCEPT INTRO -->
+  <div class="lead-block">
+    <p>The migration from SAP Commerce to Shopify Plus is a storefront swap, not a platform overhaul. <strong>Mirakl is not being replaced, reconfigured, or handed to a new implementation partner.</strong> It continues to run every marketplace operation it runs today: seller onboarding, commission calculation, payout logic, order routing, promotions settlement, and returns processing.</p>
+    <p>What changes is the customer-facing layer. SAP Commerce is replaced by Shopify Plus as the storefront, checkout, and product experience platform. The two systems are joined by the Mirakl Connect operator connector (a Shopify app built and maintained by Mirakl) which keeps products, inventory, and orders in sync between them.</p>
+  </div>
+
+  <!-- SECTION 1: TWO PLATFORMS -->
+  <section class="section">
+    <div class="section-label section-label--navy">Architecture Overview</div>
+    <h2 class="section-title" id="sec-architecture">Two platforms, one marketplace</h2>
+    <p class="section-intro">The architecture separates cleanly into two layers: the marketplace engine and the customer experience layer, connected by a certified integration. Each platform does what it is built for.</p>
+
+    <div class="cap-grid" style="margin-bottom: 1.5rem;">
+
+      <div class="cap-card" style="border-top: 3px solid var(--teal); padding-top: 1.5rem;">
+        <div class="cap-title" style="font-size: 1rem; margin-bottom: 0.75rem;">
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;display:inline-block;margin-right:0.5rem;"></span>
+          Mirakl: Marketplace Engine
+        </div>
+        <p class="cap-body" style="margin-bottom: 0.75rem;">Mirakl is the system of record for all marketplace commercial operations. It owns the business logic that makes the marketplace function: how commissions are calculated, how promotions are funded, how sellers are onboarded, how payouts are scheduled, and how returns are financially settled. None of this is touched by the migration.</p>
+        <p class="cap-body" style="color: var(--teal); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.03em;">Seller onboarding · Commission calculation · Order routing · Payout and settlement · Promotions funding · Returns processing · Vendor SLA enforcement · Operator invoicing</p>
+      </div>
+
+      <div class="cap-card" style="border-top: 3px solid var(--sage); padding-top: 1.5rem;">
+        <div class="cap-title" style="font-size: 1rem; margin-bottom: 0.75rem;">
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--sage);flex-shrink:0;display:inline-block;margin-right:0.5rem;"></span>
+          Shopify Plus: Customer Experience Layer
+        </div>
+        <p class="cap-body" style="margin-bottom: 0.75rem;">Shopify Plus replaces SAP Commerce as the storefront, checkout, and customer experience platform. It handles everything the customer sees and interacts with, including VAT calculation at checkout, multi-currency display, and brand-aligned checkout flows. It receives product data from Mirakl and sends confirmed orders back to Mirakl for routing and fulfilment.</p>
+        <p class="cap-body" style="color: var(--sage); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.03em;">Storefront and navigation · Product display pages · Checkout and payment · VAT calculation · Multi-currency · SEO and CMS · Buyer-facing invoicing · UX and brand experience</p>
+      </div>
+
+      <div class="cap-card" style="border-top: 3px solid var(--gold); padding-top: 1.5rem; grid-column: span 2;">
+        <div class="cap-title" style="font-size: 1rem; margin-bottom: 0.75rem;">
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;display:inline-block;margin-right:0.5rem;"></span>
+          Mirakl Connect: The Bridge
+        </div>
+        <p class="cap-body">Mirakl Connect is the official operator connector built by Mirakl for Shopify. It is not a custom integration or third-party middleware. It is a certified Shopify app maintained by Mirakl itself. The connector handles two flows: products and inventory sync from Mirakl into Shopify listings (so Shopify always reflects the current Mirakl catalogue), and orders flow from Shopify back into Mirakl on payment confirmation (so Mirakl can route, calculate commission, and manage fulfilment). The connector replaces the SAP Commerce to Mirakl integration without requiring any changes to Mirakl's internal configuration.</p>
+      </div>
+
+    </div>
+
+
+  </section>
+
+  <!-- SECTION 2: ARCHITECTURE DIAGRAM -->
+  <section class="section">
+    <div class="section-label section-label--teal">Data Flow</div>
+    <h2 class="section-title" id="sec-diagram">How the two systems work together</h2>
+    <p class="section-intro">Products and inventory flow from Mirakl into Shopify. Orders flow from Shopify back to Mirakl. Mirakl retains full control of all commercial and financial processing downstream.</p>
+
+    <div class="mermaid-section" style="margin-bottom: 1.5rem;">
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()">+</button>
+        <button class="zoom-btn" onclick="zoomOut()">−</button>
+        <button class="zoom-btn" onclick="zoomReset()">↺</button>
+      </div>
+      <div class="mermaid-wrap" id="diagramWrap">
+        <div class="mermaid" id="mainDiagram">
+flowchart TD
+    C(["Customer
+Browser"])
+    SP["Shopify Plus
+Storefront &amp; Checkout"]
+    MC["Mirakl Connect
+Operator Connector"]
+    MK[("Mirakl Platform
+System of Record")]
+    V1["Vendor A
+Consignment / Warehouse"]
+    V2["Vendor B
+Direct Ship"]
+    PSP["PSP / Payments
+Stripe / Adyen"]
+
+    C -->|"Browse &amp; Purchase"| SP
+    SP -->|"Order created
+→ push via API"| MC
+    MC -->|"Order routed
+to Mirakl"| MK
+    MK -->|"Commission calc
+Payout config
+SLA enforcement"| MK
+    MK -->|"Route to
+consignment location"| V1
+    MK -->|"Route to
+vendor"| V2
+    MK -->|"Catalog sync
+(products + inventory)"| MC
+    MC -->|"Products →
+Shopify listings"| SP
+    MK -->|"Payout
+instructions"| PSP
+    PSP -->|"Vendor
+settlement"| V2
+
+    classDef shopify fill:#e5f0e7,stroke:#3d6b45,color:#1a3620,font-weight:600
+    classDef mirakl fill:#e0f0f0,stroke:#1a6b6b,color:#0d3535,font-weight:600
+    classDef connector fill:#f5edd6,stroke:#b8862a,color:#5c3d08,font-weight:600
+    classDef external fill:#f0ede7,stroke:#8a8070,color:#3d3830
+    classDef psp fill:#e5f0e7,stroke:#3d6b45,color:#1a3620
+
+    class SP shopify
+    class MK mirakl
+    class MC connector
+    class C,V1,V2 external
+    class PSP psp
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout--key">
+      <strong>Key principle:</strong> Mirakl Connect does not change what Mirakl does. It changes how orders arrive and how products are published. Mirakl's internal configuration (commission rules, payout schedules, promotional funding, SLA parameters) is untouched. Sources: <a href="https://developer.mirakl.com/content/connector/operator/shopify" style="color: var(--gold-light);">developer.mirakl.com/content/connector/operator/shopify</a> · <a href="https://developer.mirakl.com/content/connector/third-party/shopify" style="color: var(--gold-light);">developer.mirakl.com/content/connector/third-party/shopify</a>
+    </div>
+  </section>
+
+  <!-- SECTION 3: OWNERSHIP TABLE -->
+  <section class="section">
+    <div class="section-label section-label--gold">System Ownership</div>
+    <h2 class="section-title" id="sec-ownership">Who owns what: post-migration</h2>
+    <p class="section-intro">Every operational function mapped to its system owner. The pattern is consistent: Mirakl retains ownership of all marketplace commercial and financial functions. Shopify Plus takes over the customer experience layer from SAP Commerce.</p>
+
+    <div class="ownership-table-wrap">
+      <table class="ownership-table">
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>System Owner</th>
+            <th>Change from SAP setup?</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Seller and brand onboarding</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Mirakl seller portal and onboarding workflows unchanged</td>
+          </tr>
+          <tr>
+            <td>Product catalogue management</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Connector auto-syncs Mirakl catalogue into Shopify listings</td>
+          </tr>
+          <tr>
+            <td>Inventory levels</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Stock updates pushed to Shopify in real time via connector</td>
+          </tr>
+          <tr>
+            <td>Order routing: consignment and direct ship</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Mirakl receives order from Shopify and routes per existing rules</td>
+          </tr>
+          <tr>
+            <td>Commission calculation</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>All variable rate logic (by category, tier, model) stays in Mirakl config</td>
+          </tr>
+          <tr>
+            <td>Promotional payout split</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Mirakl promotions module controls operator/seller funding rules</td>
+          </tr>
+          <tr>
+            <td>Returns: financial settlement</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Return flag passed from Shopify; Mirakl handles commission clawback and vendor debit</td>
+          </tr>
+          <tr>
+            <td>Vendor payout and settlement</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Mirakl instructs PSP directly; payout schedules unchanged</td>
+          </tr>
+          <tr>
+            <td>Vendor SLA enforcement</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>All seller performance management stays in Mirakl</td>
+          </tr>
+          <tr>
+            <td>Marketplace operator to seller invoicing</td>
+            <td><span class="owner-badge owner--mirakl">Mirakl</span></td>
+            <td>No change</td>
+            <td>Commission and fee invoices to sellers generated by Mirakl</td>
+          </tr>
+          <tr>
+            <td>Storefront: browse, search, product pages</td>
+            <td><span class="owner-badge owner--shopify">Shopify Plus</span></td>
+            <td><strong>Replaces SAP Commerce</strong></td>
+            <td>Receives and displays product data from Mirakl via connector</td>
+          </tr>
+          <tr>
+            <td>Checkout and payment collection</td>
+            <td><span class="owner-badge owner--shopify">Shopify Plus</span></td>
+            <td><strong>Replaces SAP Commerce</strong></td>
+            <td>Pushes confirmed order to Mirakl on payment success</td>
+          </tr>
+          <tr>
+            <td>VAT calculation at checkout</td>
+            <td><span class="owner-badge owner--shopify">Shopify Plus</span></td>
+            <td>New: Shopify Tax</td>
+            <td>Automatic UAE VAT calculation, collection, and reporting</td>
+          </tr>
+          <tr>
+            <td>Buyer-facing invoice generation</td>
+            <td><span class="owner-badge owner--shopify">Shopify Plus</span></td>
+            <td>New: via invoice app</td>
+            <td>Shopify-native apps (e.g. Sufio) for VAT-compliant customer invoices</td>
+          </tr>
+          <tr>
+            <td>UX, CMS, SEO</td>
+            <td><span class="owner-badge owner--shopify">Shopify Plus</span></td>
+            <td><strong>Replaces SAP Commerce</strong></td>
+            <td>Full theme and content management on Shopify Plus</td>
+          </tr>
+          <tr>
+            <td>API bridge and data sync</td>
+            <td><span class="owner-badge owner--connector">Mirakl Connect</span></td>
+            <td>Replaces SAP to Mirakl integration</td>
+            <td>Official connector maintained by Mirakl, available as a Shopify app</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SHOPIFY PLUS CAPABILITIES -->
+  <section class="section">
+    <div class="section-label section-label--sage">Shopify Plus Capabilities</div>
+    <h2 class="section-title" id="sec-capabilities">What Shopify Plus delivers at the Plus tier</h2>
+    <p class="section-intro">Shopify Plus goes well beyond a storefront. At the Plus tier, the platform provides native tools for multi-currency selling, UAE VAT compliance, custom checkout logic, and operational automation, all relevant to Curate's operating model.</p>
+
+    <div class="cap-grid">
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Shopify Markets: multi-currency and regional pricing</div>
+        <p class="cap-body">A single storefront can serve multiple currencies and regions with localised pricing, language, and tax rules. For a UAE marketplace with international vendors, this handles currency display and collection natively, with no custom development required.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Shopify Tax: UAE VAT compliance</div>
+        <p class="cap-body">Shopify Tax calculates VAT at checkout automatically, tracks VAT liability across all orders, and generates reports for filing. Buyer-facing VAT-compliant invoices are handled via Shopify-native invoice apps (Sufio, Order Printer Pro). Marketplace-to-seller invoicing remains Mirakl's domain.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Shopify Functions: custom checkout logic</div>
+        <p class="cap-body">Shopify Functions allow custom business logic to run server-side inside the checkout: discount validation, delivery method filtering by vendor, and custom order routing rules. This is not bolt-on JavaScript; it is a Shopify-native extension framework covering checkout logic that sits outside Mirakl's scope.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Shopify Flow: no-code operations automation</div>
+        <p class="cap-body">Flow is a no-code workflow automation tool available exclusively on Plus. It triggers actions on order, customer, or product events: for example, tagging orders by vendor, sending operational alerts, or calling downstream APIs. It reduces manual operational overhead without custom development.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Multi-location fulfilment</div>
+        <p class="cap-body">Shopify Plus natively supports multiple fulfilment locations. For Curate's consignment model (stock held centrally, shipped from warehouse), Shopify manages the physical inventory record while Mirakl determines which seller fulfils. The two systems co-operate cleanly; neither overrides the other.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Checkout Extensibility</div>
+        <p class="cap-body">Checkout Extensibility on Plus allows branded, compliant checkout UI customisation without forking Shopify's checkout codebase. It supports custom fields, post-purchase pages, and brand-aligned experiences, areas that required significant custom development effort on SAP Commerce.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>API-first architecture</div>
+        <p class="cap-body">Shopify Plus exposes the full Storefront API, Admin API, and Webhooks API: the same interfaces that Mirakl Connect uses to sync products and receive orders. No custom middleware needs to be built. The certified connector uses these APIs directly, making the integration reliable and maintainable.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>B2B on Shopify</div>
+        <p class="cap-body">Native B2B features including company accounts, net payment terms, volume pricing, and draft orders, are included on Shopify Plus with no additional licensing. If Curate has a trade or B2B customer segment, this is available out of the box.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-title"><span class="cap-dot"></span>Vendor Shopify connector</div>
+        <p class="cap-body">For vendors who run their own Shopify stores, Mirakl provides a third-party connector (developer.mirakl.com/content/connector/third-party/shopify) that syncs their catalogue and inventory directly into Mirakl. This removes the need for manual data entry into the seller portal and simplifies onboarding for Shopify-native vendors.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: ANTICIPATED QUESTIONS -->
+  <section class="section">
+    <div class="section-label section-label--amber">Common Questions</div>
+    <h2 class="section-title" id="sec-questions">Questions about this approach</h2>
+    <p class="section-intro">A few questions come up naturally when reviewing a two-platform architecture. These are addressed directly below.</p>
+
+    <div class="concern-grid">
+
+      <div class="concern-item clarified">
+        <div class="concern-inner">
+          <div class="concern-q">
+            <span class="concern-badge badge--design">By Design</span>
+            Does this require a Mirakl implementation partner?
+          </div>
+          <p class="concern-a">A Mirakl systems integrator is needed when implementing Mirakl from scratch: configuring commission structures, building payout schedules, and setting up seller SLA workflows. Curate already has Mirakl implemented and operating. The work required here is not reimplementing Mirakl. It is connecting Shopify to Mirakl using the certified operator connector. Pacer handles this connection. If Mirakl's configuration needs to evolve independently (new commission tiers, new seller onboarding workflows), that is a parallel Mirakl workstream and not a dependency for the Shopify migration.</p>
+        </div>
+      </div>
+
+      <div class="concern-item addressed">
+        <div class="concern-inner">
+          <div class="concern-q">
+            <span class="concern-badge badge--correct">Mirakl-Owned</span>
+            How are vendor commissions, payouts, and promotions affected?
+          </div>
+          <p class="concern-a">They are not affected. Mirakl owns all of these functions end-to-end and continues to do so after the migration. Commission calculation (variable rates by category, volume, and fulfilment model), promotional payout funding (operator vs. seller split), and vendor settlement schedules all live in Mirakl's operator configuration. When orders arrive via the connector from Shopify instead of SAP Commerce, Mirakl processes them identically. None of this logic is re-implemented, migrated, or altered as part of this project.</p>
+        </div>
+      </div>
+
+      <div class="concern-item valid">
+        <div class="concern-inner">
+          <div class="concern-q">
+            <span class="concern-badge badge--valid">Needs Planning</span>
+            How does the product catalogue move across?
+          </div>
+          <p class="concern-a">The correct migration path runs through Mirakl, not directly from SAP to Shopify. Products that already exist in Mirakl's catalogue are synced automatically into Shopify by the connector, with no manual product upload required. Products currently held only in SAP need to be onboarded into Mirakl first, after which the Shopify sync is automatic. This makes catalogue migration primarily a Mirakl data ingestion exercise. We will produce a dedicated migration plan scoping the SAP to Mirakl data audit and ingestion work.</p>
+        </div>
+      </div>
+
+      <div class="concern-item valid">
+        <div class="concern-inner">
+          <div class="concern-q">
+            <span class="concern-badge badge--shopify">Shopify Plus</span>
+            What about VAT, invoicing, and total cost of ownership?
+          </div>
+          <p class="concern-a">UAE VAT at checkout is handled by Shopify Tax natively. Buyer-facing VAT invoices are generated via a Shopify-native invoice app included in the project scope. Marketplace-to-seller invoicing remains Mirakl's domain and does not change. On total cost of ownership: Shopify Plus is priced at $2,300/month (~AED 100–110K per year), a fixed and known cost. Mirakl licensing costs are unchanged by the storefront migration; this is an existing cost Curate carries regardless. A full Year-1 TCO breakdown covering licences, apps, and development will be included in the revised proposal.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: PATH FORWARD -->
+  <section class="section">
+    <div class="section-label section-label--navy">Recommended Approach</div>
+    <h2 class="section-title" id="sec-path">The path forward</h2>
+    <p class="section-intro">The migration is a well-defined storefront swap with a clear two-phase delivery. Mirakl is not reconfigured. The connector replaces the SAP to Mirakl integration point.</p>
+
+    <div class="callout callout--affirm" style="margin-bottom: 1.5rem;">
+      <strong>Core principle:</strong> We do not touch Mirakl. We connect to it. Mirakl's existing configuration (commissions, payouts, promotions, returns, SLAs) remains the operator's domain throughout. The Mirakl Connect operator connector, built and maintained by Mirakl, handles the bridge.
+    </div>
+
+    <div class="path-grid">
+      <div class="path-phase">
+        <div class="phase-header">
+          <span class="phase-num">Phase 1</span>
+          <span class="phase-name">Shopify Plus Storefront</span>
+        </div>
+        <div class="phase-body">
+          <div class="phase-item">Install and configure Mirakl Connect operator connector</div>
+          <div class="phase-item">Shopify theme build: storefront, PDP, PLP, search, navigation</div>
+          <div class="phase-item">Checkout configuration: Shopify Tax (UAE VAT) and checkout extensions</div>
+          <div class="phase-item">SEO migration from SAP Commerce URL structure</div>
+          <div class="phase-item">Vendor template pages and brand onboarding experience</div>
+          <div class="phase-item">Catalogue migration plan: SAP to Mirakl data audit, then auto-sync to Shopify</div>
+          <div class="phase-item">UAT and parallel-run period alongside SAP Commerce</div>
+        </div>
+      </div>
+
+      <div class="path-phase">
+        <div class="phase-header">
+          <span class="phase-num">Phase 2</span>
+          <span class="phase-name">Optimisation and Extensions</span>
+        </div>
+        <div class="phase-body">
+          <div class="phase-item">Shopify Flow automation: operational workflows and vendor alerting</div>
+          <div class="phase-item">Invoice app integration for buyer-facing VAT invoices</div>
+          <div class="phase-item">Loyalty, reviews, and search app layer (Shopify app ecosystem)</div>
+          <div class="phase-item">B2B account configuration if trade customer segment is confirmed</div>
+          <div class="phase-item">Third-party vendor connector for Shopify-native sellers</div>
+          <div class="phase-item">Performance optimisation, CRO, and analytics instrumentation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="section">
+    <div class="section-label section-label--teal">Reference Documentation</div>
+    <h2 class="section-title" id="sec-sources">Technical sources</h2>
+    <div class="ve-card">
+      <ul class="source-list">
+        <li>
+          <a href="https://developer.mirakl.com/content/connector/operator/shopify">Mirakl Connect: Operator/Shopify Connector Documentation</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Product sync, order routing, and API architecture for the marketplace operator</span>
+        </li>
+        <li>
+          <a href="https://developer.mirakl.com/content/connector/third-party/shopify">Mirakl Connect: Third-Party/Shopify Connector Documentation</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Vendor-side connector allowing seller Shopify catalogues to sync into Mirakl</span>
+        </li>
+        <li>
+          <a href="https://help.shopify.com/en/manual/markets">Shopify Markets</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Multi-currency and multi-region selling capabilities on Shopify Plus</span>
+        </li>
+        <li>
+          <a href="https://help.shopify.com/en/manual/taxes/shopify-tax">Shopify Tax</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Automatic VAT calculation, collection, and compliance reporting</span>
+        </li>
+        <li>
+          <a href="https://shopify.dev/docs/api/functions">Shopify Functions API</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Custom checkout logic, discount validation, and delivery routing extensions</span>
+        </li>
+        <li>
+          <a href="https://help.shopify.com/en/manual/shopify-flow">Shopify Flow</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">No-code workflow automation for operational tasks on Shopify Plus</span>
+        </li>
+        <li>
+          <a href="https://help.shopify.com/en/manual/b2b">B2B on Shopify</a>
+          <span style="color: var(--text-muted); margin-left: 0.5rem;">Native B2B accounts, net payment terms, and volume pricing on Plus</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-brand">
+      Prepared by <strong>Pacer Studio</strong> · joe@pacer.studio · March 2026
+    </div>
+    <div class="footer-brand" style="text-align: right;">
+      Confidential: prepared for Reem Mall / Curate
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#e0f0f0',
+      primaryTextColor: '#0d3535',
+      primaryBorderColor: '#1a6b6b',
+      lineColor: '#5c5648',
+      secondaryColor: '#e5f0e7',
+      tertiaryColor: '#f5edd6',
+      background: '#ffffff',
+      mainBkg: '#e0f0f0',
+      nodeBorder: '#1a6b6b',
+      clusterBkg: '#f5f3ef',
+      titleColor: '#1a1714',
+      edgeLabelBackground: '#faf8f4',
+      fontFamily: 'IBM Plex Sans, system-ui, sans-serif',
+      fontSize: '14px',
+    },
+    flowchart: { curve: 'basis', padding: 20 }
+  });
+
+  // Zoom controls
+  let scale = 1;
+  const wrap = document.getElementById('diagramWrap');
+
+  function applyZoom() {
+    const svg = wrap.querySelector('svg');
+    if (svg) {
+      svg.style.transform = `scale(${scale})`;
+      svg.style.transformOrigin = 'center center';
+    }
+  }
+
+  function zoomIn() { scale = Math.min(scale + 0.15, 3); applyZoom(); }
+  function zoomOut() { scale = Math.max(scale - 0.15, 0.4); applyZoom(); }
+  function zoomReset() { scale = 1; applyZoom(); }
+
+  wrap.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn(); else zoomOut();
+    }
+  }, { passive: false });
+</script>
+</body>
+</html>
