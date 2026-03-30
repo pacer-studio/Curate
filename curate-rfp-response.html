@@ -9,37 +9,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'TWK Lausanne 400', Inter, -apple-system, 'Helvetica Neue', sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --surface2: #191919;
-    --surface-elevated: #1f1f1f;
-    --border: rgba(255, 255, 255, 0.07);
-    --border-bright: rgba(255, 255, 255, 0.13);
-    --text: #f0f0f0;
-    --text-dim: #888888;
-    --text-faint: #444444;
-    --accent: #3fb950;
-    --accent-bright: #56d364;
-    --accent-dim: rgba(63, 185, 80, 0.08);
-    --navy: #f0f0f0;
-    --sage: #3fb950;
-    --sage-pale: rgba(63, 185, 80, 0.06);
-    --code-bg: #0a0a0a;
-    --code-text: #d0d0d0;
-    --green: #3fb950;
-    --green-dim: rgba(63, 185, 80, 0.12);
-    --red: #f85149;
-    --red-dim: rgba(248, 81, 73, 0.12);
-    --blue: #58a6ff;
-    --blue-dim: rgba(88, 166, 255, 0.12);
-    --amber: #d29922;
-    --amber-dim: rgba(210, 153, 34, 0.12);
-    --purple: #bc8cff;
-    --purple-dim: rgba(188, 140, 255, 0.12);
-    --teal: #39d0d8;
-    --teal-dim: rgba(57, 208, 216, 0.12);
+    --bg: #EDEDED;
+    --surface: #E4E4E4;
+    --surface2: #D8D8D8;
+    --surface-elevated: #CECECE;
+    --border: rgba(0, 0, 0, 0.09);
+    --border-bright: rgba(0, 0, 0, 0.18);
+    --text: #0D0D0E;
+    --text-dim: #5C5C5E;
+    --text-faint: #ABABAB;
+    --accent: #0D0D0E;
+    --accent-bright: #000000;
+    --accent-dim: rgba(13, 13, 14, 0.06);
+    --navy: #0D0D0E;
+    --sage: #0D0D0E;
+    --sage-pale: rgba(13, 13, 14, 0.04);
+    --code-bg: #DCDCDC;
+    --code-text: #0D0D0E;
+    --green: #1E7A35;
+    --green-dim: rgba(30, 122, 53, 0.10);
+    --red: #C0392B;
+    --red-dim: rgba(192, 57, 43, 0.10);
+    --blue: #1A5FA8;
+    --blue-dim: rgba(26, 95, 168, 0.10);
+    --amber: #8A6010;
+    --amber-dim: rgba(138, 96, 16, 0.10);
+    --purple: #6A3A8A;
+    --purple-dim: rgba(106, 58, 138, 0.10);
+    --teal: #1A7A78;
+    --teal-dim: rgba(26, 122, 120, 0.10);
   }
 
   /* Light mode removed: Pacer is dark-first */
@@ -117,8 +117,8 @@
   .slide__decor { position: absolute; pointer-events: none; z-index: 0; }
 
   /* TITLE */
-  .slide--title { justify-content: center; align-items: center; text-align: center; background-image: radial-gradient(ellipse at 50% 30%, var(--accent-dim) 0%, transparent 50%); }
-  .slide--title .slide__display { color: var(--accent-bright); }
+  .slide--title { justify-content: center; align-items: center; text-align: center; background-image: none; }
+  .slide--title .slide__display { color: var(--text); }
 
   /* DIVIDER */
   .slide--divider { justify-content: center; }
@@ -181,7 +181,7 @@
   .risk-card__number { font-family: var(--font-mono); font-size: clamp(32px,4vw,48px); font-weight: 800; line-height: 1; margin-bottom: 4px; }
   .risk-card__label { font-size: clamp(11px,1.2vw,13px); color: var(--text-dim); margin-bottom: 8px; }
   .risk-card__desc { font-size: clamp(11px,1.1vw,12px); color: var(--text-dim); line-height: 1.45; }
-  .tco-bar { height: clamp(32px,4vh,48px); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: clamp(12px,1.3vw,15px); font-weight: 700; color: var(--bg); letter-spacing: 0.5px; }
+  .tco-bar { height: clamp(32px,4vh,48px); border-radius: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: clamp(12px,1.3vw,15px); font-weight: 700; color: #fff; letter-spacing: 0.5px; }
 
   /* FULL-BLEED */
   .slide--bleed { padding: 0; justify-content: flex-end; }
@@ -225,22 +225,22 @@
   .schema-legend__item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-dim); }
   .schema-legend__swatch { width: 14px; height: 14px; border-radius: 4px; border: 2px solid; }
 
-  /* Layer colours — dark mode first */
-  .layer-storefront { background: rgba(88,166,255,0.10); }
-  .layer-storefront .schema-layer__label { color: #58a6ff; }
-  .layer-storefront .schema-node { border-color: #58a6ff; background: rgba(88,166,255,0.12); }
-  .layer-marketplace { background: rgba(63,185,80,0.10); }
-  .layer-marketplace .schema-layer__label { color: #56d364; }
-  .layer-marketplace .schema-node { border-color: #3fb950; background: rgba(63,185,80,0.12); }
-  .layer-payments { background: rgba(210,153,34,0.10); }
-  .layer-payments .schema-layer__label { color: #d29922; }
-  .layer-payments .schema-node { border-color: #d29922; background: rgba(210,153,34,0.12); }
-  .layer-middleware { background: rgba(188,140,255,0.12); }
-  .layer-middleware .schema-layer__label { color: #b89ad0; }
-  .layer-middleware .schema-node { border-color: #9a7ac0; background: rgba(188,140,255,0.15); }
-  .layer-physical { background: rgba(57,208,216,0.12); }
-  .layer-physical .schema-layer__label { color: #72c4c0; }
-  .layer-physical .schema-node { border-color: #50a8a4; background: rgba(57,208,216,0.15); }
+  /* Layer colours — light mode (Pacer brand) */
+  .layer-storefront { background: rgba(26,95,168,0.07); }
+  .layer-storefront .schema-layer__label { color: #1A5FA8; }
+  .layer-storefront .schema-node { border-color: #1A5FA8; background: rgba(26,95,168,0.09); }
+  .layer-marketplace { background: rgba(30,122,53,0.07); }
+  .layer-marketplace .schema-layer__label { color: #1E7A35; }
+  .layer-marketplace .schema-node { border-color: #1E7A35; background: rgba(30,122,53,0.09); }
+  .layer-payments { background: rgba(138,96,16,0.07); }
+  .layer-payments .schema-layer__label { color: #8A6010; }
+  .layer-payments .schema-node { border-color: #8A6010; background: rgba(138,96,16,0.09); }
+  .layer-middleware { background: rgba(106,58,138,0.07); }
+  .layer-middleware .schema-layer__label { color: #6A3A8A; }
+  .layer-middleware .schema-node { border-color: #6A3A8A; background: rgba(106,58,138,0.09); }
+  .layer-physical { background: rgba(26,122,120,0.07); }
+  .layer-physical .schema-layer__label { color: #1A7A78; }
+  .layer-physical .schema-node { border-color: #1A7A78; background: rgba(26,122,120,0.09); }
 
   /* Light mode overrides */
   @media (prefers-color-scheme: light) {
@@ -262,12 +262,12 @@
   }
 
   /* BEFORE/AFTER COMPARISON SCHEMAS */
-  .layer-sap { background: rgba(248,81,73,0.08); }
-  .layer-sap .schema-layer__label { color: #e07070; }
-  .layer-sap .schema-node { border-color: #d4635a; background: rgba(248,81,73,0.12); }
-  .layer-retained { background: rgba(136,136,136,0.06); }
+  .layer-sap { background: rgba(192,57,43,0.07); }
+  .layer-sap .schema-layer__label { color: #C0392B; }
+  .layer-sap .schema-node { border-color: #C0392B; background: rgba(192,57,43,0.09); }
+  .layer-retained { background: rgba(92,92,94,0.06); }
   .layer-retained .schema-layer__label { color: var(--text-dim); }
-  .layer-retained .schema-node { border-color: rgba(136,136,136,0.4); background: rgba(136,136,136,0.08); }
+  .layer-retained .schema-node { border-color: rgba(92,92,94,0.35); background: rgba(92,92,94,0.07); }
 
   .schema--compact .schema-node { flex: 1 1 80px; min-width: 70px; max-width: 160px; padding: 5px 8px; }
   .schema--compact .schema-node__name { font-size: clamp(10px,1.1vw,13px); }
@@ -357,57 +357,57 @@
 
   /* Arrowhead markers reuse the prefixed IDs already in place */
 
-  /* Colour palette - SAP (red/coral for BEFORE) */
-  .arch-svg .grp-sap { fill: rgba(248,81,73,0.05); stroke: #d4635a; }
-  .arch-svg .mod-sap { fill: rgba(248,81,73,0.10); stroke: #d4635a; }
-  .arch-svg .mod-sap--hero { fill: rgba(248,81,73,0.18); stroke: #d4635a; }
-  .arch-svg .sub-sap { fill: rgba(248,81,73,0.06); stroke: rgba(248,81,73,0.4); }
-  .arch-svg .txt-sap { fill: #d4635a; }
-  .arch-svg .conn-sap { stroke: #d4635a; }
+  /* Colour palette - SAP (red for BEFORE) */
+  .arch-svg .grp-sap { fill: rgba(192,57,43,0.05); stroke: #C0392B; }
+  .arch-svg .mod-sap { fill: rgba(192,57,43,0.09); stroke: #C0392B; }
+  .arch-svg .mod-sap--hero { fill: rgba(192,57,43,0.15); stroke: #C0392B; }
+  .arch-svg .sub-sap { fill: rgba(192,57,43,0.05); stroke: rgba(192,57,43,0.4); }
+  .arch-svg .txt-sap { fill: #C0392B; }
+  .arch-svg .conn-sap { stroke: #C0392B; }
 
   /* Shopify (blue) */
-  .arch-svg .grp-shop { fill: rgba(88,166,255,0.05); stroke: #5a8ec4; }
-  .arch-svg .mod-shop { fill: rgba(88,166,255,0.10); stroke: #5a8ec4; }
-  .arch-svg .mod-shop--hero { fill: rgba(88,166,255,0.18); stroke: #5a8ec4; }
-  .arch-svg .sub-shop { fill: rgba(88,166,255,0.06); stroke: rgba(88,166,255,0.4); }
-  .arch-svg .txt-shop { fill: #5a8ec4; }
-  .arch-svg .conn-shop { stroke: #5a8ec4; }
+  .arch-svg .grp-shop { fill: rgba(26,95,168,0.05); stroke: #1A5FA8; }
+  .arch-svg .mod-shop { fill: rgba(26,95,168,0.09); stroke: #1A5FA8; }
+  .arch-svg .mod-shop--hero { fill: rgba(26,95,168,0.15); stroke: #1A5FA8; }
+  .arch-svg .sub-shop { fill: rgba(26,95,168,0.05); stroke: rgba(26,95,168,0.4); }
+  .arch-svg .txt-shop { fill: #1A5FA8; }
+  .arch-svg .conn-shop { stroke: #1A5FA8; }
 
-  /* Mirakl (green/sage) */
-  .arch-svg .grp-mkl { fill: rgba(63,185,80,0.05); stroke: #3fb950; }
-  .arch-svg .mod-mkl { fill: rgba(63,185,80,0.10); stroke: #3fb950; }
-  .arch-svg .mod-mkl--hero { fill: rgba(63,185,80,0.18); stroke: #3fb950; }
-  .arch-svg .sub-mkl { fill: rgba(63,185,80,0.06); stroke: rgba(63,185,80,0.4); }
-  .arch-svg .txt-mkl { fill: #3fb950; }
-  .arch-svg .conn-mkl { stroke: #3fb950; }
+  /* Mirakl (green) */
+  .arch-svg .grp-mkl { fill: rgba(30,122,53,0.05); stroke: #1E7A35; }
+  .arch-svg .mod-mkl { fill: rgba(30,122,53,0.09); stroke: #1E7A35; }
+  .arch-svg .mod-mkl--hero { fill: rgba(30,122,53,0.15); stroke: #1E7A35; }
+  .arch-svg .sub-mkl { fill: rgba(30,122,53,0.05); stroke: rgba(30,122,53,0.4); }
+  .arch-svg .txt-mkl { fill: #1E7A35; }
+  .arch-svg .conn-mkl { stroke: #1E7A35; }
 
-  /* Stripe / Payments (gold/amber) */
-  .arch-svg .grp-pay { fill: rgba(210,153,34,0.05); stroke: #c4a05a; }
-  .arch-svg .mod-pay { fill: rgba(210,153,34,0.10); stroke: #c4a05a; }
-  .arch-svg .mod-pay--hero { fill: rgba(210,153,34,0.18); stroke: #c4a05a; }
-  .arch-svg .sub-pay { fill: rgba(210,153,34,0.06); stroke: rgba(210,153,34,0.4); }
-  .arch-svg .txt-pay { fill: #c4a05a; }
-  .arch-svg .conn-pay { stroke: #c4a05a; }
+  /* Stripe / Payments (amber) */
+  .arch-svg .grp-pay { fill: rgba(138,96,16,0.05); stroke: #8A6010; }
+  .arch-svg .mod-pay { fill: rgba(138,96,16,0.09); stroke: #8A6010; }
+  .arch-svg .mod-pay--hero { fill: rgba(138,96,16,0.15); stroke: #8A6010; }
+  .arch-svg .sub-pay { fill: rgba(138,96,16,0.05); stroke: rgba(138,96,16,0.4); }
+  .arch-svg .txt-pay { fill: #8A6010; }
+  .arch-svg .conn-pay { stroke: #8A6010; }
 
   /* Middleware (purple) */
-  .arch-svg .grp-mid { fill: rgba(188,140,255,0.05); stroke: #9a7ac0; }
-  .arch-svg .mod-mid { fill: rgba(188,140,255,0.10); stroke: #9a7ac0; }
-  .arch-svg .mod-mid--hero { fill: rgba(188,140,255,0.18); stroke: #9a7ac0; }
-  .arch-svg .sub-mid { fill: rgba(188,140,255,0.06); stroke: rgba(188,140,255,0.4); }
-  .arch-svg .txt-mid { fill: #9a7ac0; }
-  .arch-svg .conn-mid { stroke: #9a7ac0; }
+  .arch-svg .grp-mid { fill: rgba(106,58,138,0.05); stroke: #6A3A8A; }
+  .arch-svg .mod-mid { fill: rgba(106,58,138,0.09); stroke: #6A3A8A; }
+  .arch-svg .mod-mid--hero { fill: rgba(106,58,138,0.15); stroke: #6A3A8A; }
+  .arch-svg .sub-mid { fill: rgba(106,58,138,0.05); stroke: rgba(106,58,138,0.4); }
+  .arch-svg .txt-mid { fill: #6A3A8A; }
+  .arch-svg .conn-mid { stroke: #6A3A8A; }
 
   /* Physical / Logistics (teal) */
-  .arch-svg .grp-phy { fill: rgba(57,208,216,0.05); stroke: #50a8a4; }
-  .arch-svg .mod-phy { fill: rgba(57,208,216,0.10); stroke: #50a8a4; }
-  .arch-svg .sub-phy { fill: rgba(57,208,216,0.06); stroke: rgba(57,208,216,0.4); }
-  .arch-svg .txt-phy { fill: #50a8a4; }
-  .arch-svg .conn-phy { stroke: #50a8a4; }
+  .arch-svg .grp-phy { fill: rgba(26,122,120,0.05); stroke: #1A7A78; }
+  .arch-svg .mod-phy { fill: rgba(26,122,120,0.09); stroke: #1A7A78; }
+  .arch-svg .sub-phy { fill: rgba(26,122,120,0.05); stroke: rgba(26,122,120,0.4); }
+  .arch-svg .txt-phy { fill: #1A7A78; }
+  .arch-svg .conn-phy { stroke: #1A7A78; }
 
   /* Neutral / retained services */
-  .arch-svg .grp-ret { fill: rgba(136,136,136,0.03); stroke: rgba(136,136,136,0.35); }
-  .arch-svg .mod-ret { fill: rgba(136,136,136,0.06); stroke: rgba(136,136,136,0.3); }
-  .arch-svg .sub-ret { fill: rgba(136,136,136,0.04); stroke: rgba(136,136,136,0.25); }
+  .arch-svg .grp-ret { fill: rgba(92,92,94,0.04); stroke: rgba(92,92,94,0.30); }
+  .arch-svg .mod-ret { fill: rgba(92,92,94,0.07); stroke: rgba(92,92,94,0.25); }
+  .arch-svg .sub-ret { fill: rgba(92,92,94,0.04); stroke: rgba(92,92,94,0.20); }
   .arch-svg .txt-ret { fill: var(--text-dim); }
 
   /* Light mode overrides */
@@ -531,6 +531,27 @@
   }
   .arch-layer__card--wide { flex: 2; }
 
+  /* ── Pacer brand overrides: zero border-radius, editorial mono palette ── */
+  .table-wrap, .slide__kpi, .badge, .card, .risk-card,
+  .coverage-bar, .stat-card, .beyond-brief, .arch-layer__card,
+  .schema-layer, .schema-node, .deck-dots, .compare-stat,
+  .coverage-source, .arch-layer__pill, .approach-grid,
+  .data-table code { border-radius: 0 !important; }
+
+  .deck-dot { border-radius: 2px; }
+
+  /* Slide label in near-black rather than green */
+  .slide__label { color: var(--text-dim); letter-spacing: 2px; }
+
+  /* Divider number — subtle watermark on light bg */
+  .slide--divider .slide__number { opacity: 0.05; color: var(--text); }
+
+  /* Bleed slide scrim adjusted for light theme */
+  .slide--bleed .slide__bg--gradient { background: linear-gradient(135deg, #EDEDED 0%, #E4E4E4 40%, #D8D8D8 100%); }
+
+  /* pacer-mark — near black */
+  .pacer-mark { color: var(--text); letter-spacing: 4px; }
+
 </style>
 </head>
 <body>
@@ -538,25 +559,18 @@
 
   <!-- ═══════════════ SLIDE 1: TITLE ═══════════════ -->
   <section class="slide slide--title">
-    <canvas id="particles" style="position:absolute;inset:0;z-index:0;pointer-events:none;"></canvas>
-    <svg class="slide__decor" style="top:0;right:0;" width="120" height="120" viewBox="0 0 120 120">
-      <line x1="120" y1="0" x2="120" y2="40" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
-      <line x1="80" y1="0" x2="120" y2="0" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
-    </svg>
-    <svg class="slide__decor" style="bottom:0;left:0;" width="120" height="120" viewBox="0 0 120 120">
-      <line x1="0" y1="80" x2="0" y2="120" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
-      <line x1="0" y1="120" x2="40" y2="120" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
-    </svg>
-    <div class="reveal"><span class="pacer-mark">Pacer Studio</span></div>
+    <div class="reveal" style="position:absolute; top:clamp(32px,5vh,56px); left:clamp(40px,8vw,120px);">
+      <img src="data:image/png;base64,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" alt="Pacer Studio" style="height:clamp(24px,3vh,36px);">
+    </div>
     <div class="reveal" style="margin-top:clamp(20px,3vh,40px);">
       <p class="slide__subtitle">Response to RFP-2026-003</p>
     </div>
     <h1 class="slide__display reveal" style="margin-top:clamp(12px,2vh,24px);">Curate Marketplace</h1>
     <div class="reveal" style="margin-top:clamp(16px,2.5vh,32px);">
-      <p class="slide__subtitle">LOT 1 &mdash; Shopify Plus + Mirakl</p>
+      <p class="slide__subtitle">LOT 1 — Shopify Plus + Mirakl</p>
     </div>
     <div class="reveal" style="margin-top:clamp(24px,4vh,48px);">
-      <p style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">March 2026 &middot; Confidential</p>
+      <p style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">March 2026 · Confidential</p>
     </div>
   </section>
 
@@ -566,7 +580,7 @@
     <div>
       <p class="slide__label reveal">Executive Summary</p>
       <h2 class="slide__heading reveal">From legacy complexity to native simplicity. One platform subscription. One marketplace connector. Zero custom middleware.</h2>
-      <p class="slide__subtitle reveal" style="margin-top:16px; max-width:680px;">Curate does not need a like-for-like SAP replacement. It needs a platform that makes the marketplace the product, ships 150+ updates a year, and puts Curate products inside every AI shopping conversation on the planet.</p>
+      <p class="slide__subtitle reveal" style="margin-top:16px; max-width:680px;">Curate does not need a like-for-like SAP replacement. It needs a platform that makes the marketplace the product, ships 150+ updates per edition (twice a year), and puts Curate products inside every AI shopping conversation on the planet.</p>
     </div>
   </section>
 
@@ -589,8 +603,8 @@
         </div>
         <div class="card reveal" style="border-top: 3px solid var(--amber);">
           <div style="font-family:var(--font-mono); font-size:clamp(28px,4vw,42px); font-weight:700; color:var(--amber); margin-bottom:8px;">03</div>
-          <div class="card__title" style="font-size:clamp(15px,1.6vw,18px);">Cut total cost of ownership by 60%+</div>
-          <div class="card__desc">Collapse the entire SAP CX module stack into 1 Shopify Plus subscription. No separate subscriptions for commerce, identity, integration, marketing, and service. No cross-module expertise required. Replace SAP CPI and Azure Microservices with Shopify Flow. Replace SAP Marketing with Klaviyo. Mirakl connects via its Operator Connector, supported by a custom Shopify app for API orchestration. WhatsApp Business and all other integrations run as native Shopify features or certified apps.</div>
+          <div class="card__title" style="font-size:clamp(15px,1.6vw,18px);">Redirect spend from maintenance to growth</div>
+          <div class="card__desc">Collapse the entire SAP CX module stack into 1 Shopify Plus subscription. No separate subscriptions for commerce, identity, integration, marketing, and service. No cross-module expertise required. Shopify has an army of engineers constantly rolling out updates that would otherwise require feature development and divert funds from growth. Every dollar currently spent keeping the lights on becomes a dollar invested in revenue-generating activities.</div>
         </div>
       </div>
     </div>
@@ -601,7 +615,7 @@
     <div style="max-width:1060px;">
       <p class="slide__label reveal">Pacer Studio</p>
       <h2 class="slide__heading reveal" style="margin-bottom:clamp(6px,1vh,12px);">We have done this before.</h2>
-      <p class="slide__subtitle reveal" style="margin-top:0; margin-bottom:clamp(14px,2vh,22px); max-width:760px; font-size:clamp(12px,1.2vw,14px); line-height:1.5; opacity:0.7;">Pacer Studio is migrating The Body Shop onto Shopify Plus: online storefront and POS across global markets. Multi-market catalogue, SAP integration, omnichannel loyalty, and thousands of SKUs. The same team, the same methodology, applied to Curate.</p>
+      <p class="slide__subtitle reveal" style="margin-top:0; margin-bottom:clamp(14px,2vh,22px); max-width:760px; font-size:clamp(12px,1.2vw,14px); line-height:1.5; opacity:0.7;">Pacer Studio has already migrated The Body Shop onto Shopify Plus across 15 international markets. Multi-market catalogue, SAP integration, omnichannel loyalty, and thousands of SKUs. The same team, the same methodology, applied to Curate.</p>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.5vw,28px);" class="reveal">
         <!-- Left: TBS case context -->
@@ -609,8 +623,8 @@
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px; border-left:3px solid var(--accent);">
             <div style="font-family:var(--font-mono); font-size:clamp(11px,1vw,13px); color:var(--accent); letter-spacing:1px; margin-bottom:8px;">THE BODY SHOP &times; PACER</div>
             <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Shopify Plus migration: storefront, checkout, and POS</div>
-              <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Multi-market commerce across global regions</div>
+              <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Migrated to Shopify Plus: storefront, checkout, and omnichannel commerce</div>
+              <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Live across 15 international markets</div>
               <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">SAP ERP integration and omnichannel loyalty</div>
               <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Thousands of SKUs: structured, enriched, AI-ready</div>
               <div style="font-size:clamp(12px,1.2vw,14px); color:var(--text);">Ongoing CRO and conversion optimisation retainer</div>
@@ -624,7 +638,7 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(8px,1.2vw,14px);">
           <div style="padding:clamp(12px,1.5vh,18px); background:var(--surface); border:1px solid var(--border); border-radius:8px; border-top:3px solid var(--blue);">
             <div style="font-family:var(--font-mono); font-size:clamp(16px,2vw,22px); font-weight:700; color:var(--blue); margin-bottom:4px;">BUILD</div>
-            <div style="font-size:clamp(10px,1vw,12px); color:var(--text-dim); line-height:1.5;">Fixed-term Shopify Plus builds. Online and POS unified from day one. 8-14 weeks.</div>
+            <div style="font-size:clamp(10px,1vw,12px); color:var(--text-dim); line-height:1.5;">Fixed-term Shopify Plus builds. Online and in-store unified from day one. 8-14 weeks.</div>
           </div>
           <div style="padding:clamp(12px,1.5vh,18px); background:var(--surface); border:1px solid var(--border); border-radius:8px; border-top:3px solid var(--accent);">
             <div style="font-family:var(--font-mono); font-size:clamp(16px,2vw,22px); font-weight:700; color:var(--accent-bright); margin-bottom:4px;">GROW</div>
@@ -653,10 +667,10 @@
         <div class="reveal" style="display:flex; flex-direction:column; gap:clamp(12px,2vh,20px);">
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
-              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">60%+</span>
+              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">~50%</span>
               <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">PLATFORM TCO REDUCTION</span>
             </div>
-            <p class="slide__body" style="font-size:13px;">From five separate SAP modules + Azure infrastructure to 1 Shopify Plus subscription. Platform, CDN, SSL, and hosting included.</p>
+            <p class="slide__body" style="font-size:13px;">From five separate SAP modules + Azure infrastructure to 1 Shopify Plus subscription. The savings freed up become investment in growth and revenue.</p>
           </div>
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
@@ -667,10 +681,10 @@
           </div>
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
-              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--blue);">12 wks</span>
-              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">TO GO LIVE</span>
+              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--blue);">8-9 wks</span>
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">LIFT-AND-SHIFT CUTOVER</span>
             </div>
-            <p class="slide__body" style="font-size:13px;">Live before SAP contract expiry. Phased rollout with zero-downtime cutover protecting 120K+ customer accounts.</p>
+            <p class="slide__body" style="font-size:13px;">Live before SAP contract expiry. Core commerce and marketplace migrated, with comprehensive UX/UI refinement delivered post-launch via the GROW retainer.</p>
           </div>
         </div>
         <div class="reveal" style="display:flex; flex-direction:column; gap:clamp(12px,2vh,20px);">
@@ -691,7 +705,7 @@
           <div style="padding:clamp(14px,2vh,20px); background:var(--accent-dim); border:1px solid var(--border-bright); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
               <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">150+</span>
-              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">UPDATES / YEAR</span>
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">UPDATES / EDITION</span>
             </div>
             <p class="slide__body" style="font-size:13px;">Shopify Editions ships twice a year. AI tools, checkout improvements, and new APIs arrive automatically. No upgrade projects. No end-of-life deadlines.</p>
           </div>
@@ -730,12 +744,12 @@
 
         <div class="approach-grid--cell" style="color:var(--text-dim); font-weight:600;">App ecosystem</div>
         <div class="approach-grid--cell verdict-dim">SAP Store (limited)</div>
-        <div class="approach-grid--cell verdict-good">10,000+ certified apps</div>
+        <div class="approach-grid--cell verdict-good">Thousands of apps</div>
         <div class="approach-grid--cell verdict-risk">Every integration hand-built</div>
 
         <div class="approach-grid--cell" style="color:var(--text-dim); font-weight:600;">Platform R&D</div>
         <div class="approach-grid--cell verdict-dim">Declining investment</div>
-        <div class="approach-grid--cell verdict-good">$2B+/year, 150+ updates</div>
+        <div class="approach-grid--cell verdict-good">$1.7B+/year, 150+ updates/edition</div>
         <div class="approach-grid--cell verdict-risk">Funded by Curate alone</div>
 
         <div class="approach-grid--cell" style="color:var(--text-dim); font-weight:600;">Vendor lock-in</div>
@@ -753,7 +767,7 @@
         <div class="approach-grid--cell verdict-good">Large partner ecosystem</div>
         <div class="approach-grid--cell verdict-risk">Critical: single team owns all</div>
       </div>
-      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: <a href="https://www.shopify.com/plus/pricing" style="color:var(--text-dim);">Shopify Plus Pricing</a> (99.99% SLA) | <a href="https://www.shopify.com/security/pci-compliant" style="color:var(--text-dim);">Shopify Security</a> (PCI DSS L1) | <a href="https://apps.shopify.com/" style="color:var(--text-dim);">Shopify App Store</a> (12,000+ apps) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates) | <a href="https://www.macrotrends.net/stocks/charts/SHOP/shopify/research-development-expenses" style="color:var(--text-dim);">Macrotrends</a> (R&D spend)</p>
+      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: <a href="https://www.shopify.com/plus/pricing" style="color:var(--text-dim);">Shopify Plus Pricing</a> (99.99% SLA) | <a href="https://www.shopify.com/security/pci-compliant" style="color:var(--text-dim);">Shopify Security</a> (PCI DSS L1) | <a href="https://apps.shopify.com/" style="color:var(--text-dim);">Shopify App Store</a> (thousands of apps) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates) | <a href="https://www.macrotrends.net/stocks/charts/SHOP/shopify/research-development-expenses" style="color:var(--text-dim);">Macrotrends</a> (R&D spend)</p>
     </div>
   </section>
 
@@ -824,7 +838,7 @@
         <div class="risk-card" style="border-top:3px solid var(--amber);">
           <div class="risk-card__number" style="color:var(--amber);">0</div>
           <div class="risk-card__label">Platform updates per year</div>
-          <div class="risk-card__desc">Shopify Plus ships 150+ updates annually at no cost. A custom platform ships only what the internal team builds. AI commerce, new payment methods, and checkout innovations all require dedicated sprints.</div>
+          <div class="risk-card__desc">Shopify Plus ships 150+ updates per edition, twice a year, at no cost. A custom platform ships only what the internal team builds. AI commerce, new payment methods, and checkout innovations all require dedicated sprints.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--red);">
           <div class="risk-card__number" style="color:var(--red);">1</div>
@@ -832,7 +846,7 @@
           <div class="risk-card__desc">Custom platforms typically create permanent dependency on the team that built them. If that team moves on, the codebase becomes a liability. Shopify Plus has thousands of certified implementation partners globally.</div>
         </div>
       </div>
-      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: Cost benchmarks based on industry analysis of custom software TCO. See <a href="https://leobit.com/blog/total_cost_of_ownership_for_custom_software_development/" style="color:var(--text-dim);">Leobit, "TCO for Custom Software"</a> | <a href="https://idealink.tech/blog/software-development-maintenance-true-cost-equation" style="color:var(--text-dim);">Idea Link, "Software Development vs Maintenance"</a> | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/yr)</p>
+      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: Cost benchmarks based on industry analysis of custom software TCO. See <a href="https://leobit.com/blog/total_cost_of_ownership_for_custom_software_development/" style="color:var(--text-dim);">Leobit, "TCO for Custom Software"</a> | <a href="https://idealink.tech/blog/software-development-maintenance-true-cost-equation" style="color:var(--text-dim);">Idea Link, "Software Development vs Maintenance"</a> | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/edition, twice yearly)</p>
     </div>
   </section>
 
@@ -851,12 +865,12 @@
           </thead>
           <tbody>
             <tr><td style="font-weight:600;">Platform / Hosting</td><td>~$180-250K/yr (5 modules)</td><td>$27,600/yr</td><td>$150-300K/yr (cloud + DB + CDN)</td></tr>
-            <tr><td style="font-weight:600;">Marketplace</td><td>~$90K/yr (Mirakl)</td><td>~$90K/yr (Mirakl retained)</td><td>~$90K/yr (Mirakl) or custom rebuild</td></tr>
+            <tr><td style="font-weight:600;">Marketplace</td><td>~$90K/yr (Mirakl)</td><td>~$200K/yr (Mirakl retained)</td><td>~$200K/yr (Mirakl) or custom rebuild</td></tr>
             <tr><td style="font-weight:600;">SaaS / Middleware</td><td>~$40-60K/yr (CPI, Marketing)</td><td>~$12K/yr (Klaviyo, Gorgias, etc.)</td><td>~$12K/yr + custom integrations</td></tr>
             <tr><td style="font-weight:600;">Initial Build / Migration</td><td>n/a (existing)</td><td>~$90K (one-time)</td><td>$300-500K+ (typical estimate)</td></tr>
             <tr><td style="font-weight:600;">Engineering / SI Team</td><td>~$150-250K/yr (SI retainer)</td><td>Included in platform</td><td>$200-400K/yr (typically 3-4 FTEs)</td></tr>
             <tr><td style="font-weight:600;">Security & Compliance</td><td>Included in subscription</td><td>Included (PCI L1, SOC 2)</td><td>$50-100K/yr (self-certification)</td></tr>
-            <tr><td style="font-weight:600;">Platform Updates</td><td>Major upgrades required</td><td>150+/yr, included</td><td>Only what team builds</td></tr>
+            <tr><td style="font-weight:600;">Platform Updates</td><td>Major upgrades required</td><td>150+/edition (2x yr), included</td><td>Only what team builds</td></tr>
           </tbody>
         </table>
       </div>
@@ -868,9 +882,9 @@
           <div style="font-size:clamp(10px,1vw,12px); color:var(--text-dim); margin-top:4px;">~$460-650K p.a. (estimated)</div>
         </div>
         <div style="text-align:center;">
-          <div class="tco-bar" style="background:var(--accent); width:55%;">~$760K</div>
+          <div class="tco-bar" style="background:var(--accent); width:55%;">~$1.3M</div>
           <div style="font-size:clamp(11px,1.2vw,13px); color:var(--accent); font-weight:700; margin-top:8px;">Shopify Plus: 5-Year TCO</div>
-          <div style="font-size:clamp(10px,1vw,12px); color:var(--text-dim); margin-top:4px;">Year 1: ~$230K | Year 2-5: ~$132K p.a.</div>
+          <div style="font-size:clamp(10px,1vw,12px); color:var(--text-dim); margin-top:4px;">Year 1: ~$340K | Year 2-5: ~$242K p.a.</div>
         </div>
         <div style="text-align:center;">
           <div class="tco-bar" style="background:var(--amber); width:100%;">~$2.0-3.5M+</div>
@@ -879,7 +893,7 @@
         </div>
       </div>
       <p class="reveal" style="font-size:clamp(9px,0.9vw,11px); color:var(--text-dim); opacity:0.6; margin-top:12px; text-align:center;">* SAP and custom-built estimates are assumptions based on publicly available pricing data and typical industry benchmarks for platforms of comparable scale.</p>
-      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:6px; line-height:1.6;">Sources: <a href="https://www.shopify.com/plus/pricing" style="color:var(--text-dim);">Shopify Plus Pricing</a> ($2,300/mo) | <a href="https://www.mirakl.com/ecosystem/sellers" style="color:var(--text-dim);">Mirakl Seller Network</a> | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/yr) | <a href="https://leobit.com/blog/total_cost_of_ownership_for_custom_software_development/" style="color:var(--text-dim);">Leobit, "TCO for Custom Software"</a> (maintenance benchmarks)</p>
+      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:6px; line-height:1.6;">Sources: <a href="https://www.shopify.com/plus/pricing" style="color:var(--text-dim);">Shopify Plus Pricing</a> ($2,300/mo) | <a href="https://www.mirakl.com/ecosystem/sellers" style="color:var(--text-dim);">Mirakl Seller Network</a> | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/edition, twice yearly) | <a href="https://leobit.com/blog/total_cost_of_ownership_for_custom_software_development/" style="color:var(--text-dim);">Leobit, "TCO for Custom Software"</a> (maintenance benchmarks)</p>
     </div>
   </section>
 
@@ -905,18 +919,18 @@
         </div>
         <div class="card" style="border-left:3px solid var(--amber); padding:clamp(14px,2vh,22px) clamp(14px,1.5vw,20px);">
           <div class="card__title" style="font-size:clamp(14px,1.4vw,16px); color:var(--amber);">How does each platform keep pace with innovation?</div>
-          <div class="card__desc" style="font-size:clamp(12px,1.2vw,13px);">AI-powered shopping, agentic storefronts, and accelerated checkout are becoming table stakes. Shopify ships 150+ updates per year automatically. SAP's investment in Commerce Cloud is declining. Custom platforms ship only what the internal team builds, and every new feature competes with bug fixes.</div>
+          <div class="card__desc" style="font-size:clamp(12px,1.2vw,13px);">AI-powered shopping, agentic storefronts, and accelerated checkout are becoming table stakes. Shopify ships 150+ updates per edition, twice a year. SAP is investing in cloud migration but its Commerce Cloud roadmap has narrowed relative to modern SaaS competitors. Custom platforms ship only what the internal team builds, and every new feature competes with bug fixes.</div>
         </div>
         <div class="card" style="border-left:3px solid var(--blue); padding:clamp(14px,2vh,22px) clamp(14px,1.5vw,20px);">
           <div class="card__title" style="font-size:clamp(14px,1.4vw,16px); color:var(--blue);">Does Curate want to be in the platform business?</div>
-          <div class="card__desc" style="font-size:clamp(12px,1.2vw,13px);">Maintaining SAP means retaining specialist SIs and managing complex upgrades. Running a custom platform means becoming a technology company: managing infrastructure, hiring engineers, and owning a product roadmap. Shopify Plus lets Curate focus on what it does best: luxury retail and marketplace curation.</div>
+          <div class="card__desc" style="font-size:clamp(12px,1.2vw,13px);">Maintaining SAP means retaining specialist SIs and managing complex upgrades. Running a custom platform means becoming a technology company. Every sprint spent keeping the lights on or rolling out features that Shopify ships for free is a sprint not spent on growth, customer acquisition, and revenue. Shopify Plus lets Curate focus investment where it compounds: merchandising, CRO, and marketplace expansion.</div>
         </div>
         <div class="card" style="border-left:3px solid var(--blue); padding:clamp(14px,2vh,22px) clamp(14px,1.5vw,20px);">
           <div class="card__title" style="font-size:clamp(14px,1.4vw,16px); color:var(--blue);">What is the exit strategy?</div>
           <div class="card__desc" style="font-size:clamp(12px,1.2vw,13px);">SAP contract expiry is already forcing this conversation. With Shopify Plus, data is portable and the ecosystem provides standard migration paths. A bespoke platform typically locks the operator into a proprietary codebase with no standard migration tooling.</div>
         </div>
       </div>
-      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: <a href="https://www.shopify.com/news/bfcm-data-2024" style="color:var(--text-dim);">Shopify BFCM 2024</a> ($11.5B sales) | <a href="https://www.shopify.com/security/pci-compliant" style="color:var(--text-dim);">Shopify PCI Compliance</a> (Level 1) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/yr) | SAP and custom-built risk profiles based on publicly available industry analysis.</p>
+      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: <a href="https://www.shopify.com/news/bfcm-data-2024" style="color:var(--text-dim);">Shopify BFCM 2024</a> ($11.5B sales) | <a href="https://www.shopify.com/security/pci-compliant" style="color:var(--text-dim);">Shopify PCI Compliance</a> (Level 1) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/edition, twice yearly) | SAP and custom-built risk profiles based on publicly available industry analysis.</p>
     </div>
   </section>
 
@@ -925,40 +939,40 @@
   <section class="slide slide--content" style="background-image:radial-gradient(ellipse at 50% 30%, var(--accent-dim) 0%, transparent 45%);">
     <div style="max-width:1060px;">
       <p class="slide__label reveal">Shopify Plus: Measurable Gains</p>
-      <h2 class="slide__heading reveal" style="margin-bottom:clamp(14px,2vh,24px);">What Curate gains by choosing enterprise SaaS</h2>
+      <h2 class="slide__heading reveal" style="margin-bottom:clamp(14px,2vh,24px);">What Curate gains by choosing Shopify Plus</h2>
       <div class="card-grid reveal" style="grid-template-columns: repeat(3, 1fr); gap: clamp(10px,1.5vw,18px);">
         <div class="risk-card" style="border-top:3px solid var(--accent);">
-          <div class="risk-card__number" style="color:var(--accent);">60%+</div>
+          <div class="risk-card__number" style="color:var(--accent);">~50%</div>
           <div class="risk-card__label">TCO reduction vs. SAP</div>
-          <div class="risk-card__desc">Year 2-5 run-rate drops from SAP's estimated $300K+ p.a. to ~$132K p.a. with Shopify Plus + Mirakl. Savings compound every year.</div>
+          <div class="risk-card__desc">Year 2-5 platform run-rate drops from SAP's estimated $460K+ p.a. to ~$242K p.a. with Shopify Plus + Mirakl. The difference compounds every year, and every dollar saved on infrastructure is a dollar redirected to growth.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--accent);">
-          <div class="risk-card__number" style="color:var(--accent);">3-5x</div>
+          <div class="risk-card__number" style="color:var(--accent);">2-3x</div>
           <div class="risk-card__label">Cheaper than custom-built</div>
-          <div class="risk-card__desc">5-year TCO of ~$760K vs. $2-3.5M+ for a custom platform. The gap widens every year as maintenance and engineering costs compound.</div>
+          <div class="risk-card__desc">5-year TCO of ~$1.3M vs. $2-3.5M+ for a custom platform. The gap widens every year as custom maintenance and engineering costs compound, diverting funds from revenue-generating activities.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--blue);">
-          <div class="risk-card__number" style="color:var(--blue);">12 wks</div>
-          <div class="risk-card__label">Go-live vs. 6-12 months custom</div>
-          <div class="risk-card__desc">Shopify Plus ships a production store in 12 weeks because 72% of capabilities are native. Custom platforms must engineer every feature before day one.</div>
+          <div class="risk-card__number" style="color:var(--blue);">8-9 wks</div>
+          <div class="risk-card__label">Lift-and-shift cutover</div>
+          <div class="risk-card__desc">A focused lift-and-shift to meet the SAP deadline. Core commerce and marketplace live in 8-9 weeks. Comprehensive UX/UI refinement follows post-launch via the GROW retainer, keeping the critical path clear.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--blue);">
           <div class="risk-card__number" style="color:var(--blue);">150+</div>
-          <div class="risk-card__label">Free platform updates per year</div>
-          <div class="risk-card__desc">AI storefronts, checkout improvements, new payment methods, and security patches all ship automatically. Zero upgrade effort from Curate's team.</div>
+          <div class="risk-card__label">Free platform updates per edition</div>
+          <div class="risk-card__desc">AI storefronts, checkout improvements, new payment methods, and security patches all ship automatically. On any other platform, each of these would require feature development sprints, pulling budget and attention away from growth.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--amber);">
           <div class="risk-card__number" style="color:var(--amber);">0</div>
           <div class="risk-card__label">Infrastructure engineers needed</div>
-          <div class="risk-card__desc">Shopify manages hosting, CDN, scaling, security, and disaster recovery. Curate's team focuses on merchandising, content, and growth, not server uptime.</div>
+          <div class="risk-card__desc">Shopify manages hosting, CDN, scaling, security, and disaster recovery. Every dollar currently spent keeping the lights on can be redirected to growth, revenue, and customer acquisition instead.</div>
         </div>
         <div class="risk-card" style="border-top:3px solid var(--amber);">
-          <div class="risk-card__number" style="color:var(--amber);">10,000+</div>
+          <div class="risk-card__number" style="color:var(--amber);">1000s</div>
           <div class="risk-card__label">Apps in the ecosystem</div>
           <div class="risk-card__desc">Need a new capability? Install an app. No custom development. No waiting for sprints. Klaviyo, Gorgias, Shipa, and thousands more integrate in minutes, not months.</div>
         </div>
       </div>
-      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: TCO and savings figures derived from slide 6 analysis | <a href="https://apps.shopify.com/" style="color:var(--text-dim);">Shopify App Store</a> (12,000+ apps) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/yr) | Go-live estimate based on Pacer Studio delivery methodology and 72% native epic coverage.</p>
+      <p class="reveal" style="font-size:clamp(8px,0.8vw,10px); color:var(--text-dim); opacity:0.5; margin-top:clamp(8px,1.5vh,14px); line-height:1.6;">Sources: TCO and savings figures derived from slide 6 analysis | <a href="https://apps.shopify.com/" style="color:var(--text-dim);">Shopify App Store</a> (thousands of apps) | <a href="https://www.shopify.com/editions/summer2025" style="color:var(--text-dim);">Shopify Editions Summer '25</a> (150+ updates/edition, twice yearly) | Go-live estimate based on Pacer Studio delivery methodology and 72% native epic coverage.</p>
     </div>
   </section>
 
@@ -988,7 +1002,7 @@
         <div class="card reveal" style="border-left: 3px solid #58a6ff; padding:clamp(12px,1.5vw,20px);">
           <div style="font-size:clamp(28px,3vw,40px); font-weight:800; color:var(--text); letter-spacing:-0.02em;">Leader</div>
           <div class="card__title" style="font-size:clamp(12px,1.2vw,14px); margin-top:4px;">Forrester Wave B2B Commerce 2024</div>
-          <div class="card__desc" style="font-size:clamp(11px,1.1vw,12px);">Highest scores possible for Innovation, Market Presence, and Partner Ecosystem. 150+ product updates shipped twice a year, backed by $2B+ in annual R&amp;D.</div>
+          <div class="card__desc" style="font-size:clamp(11px,1.1vw,12px);">Highest scores possible for Innovation, Market Presence, and Partner Ecosystem. 150+ product updates shipped twice a year, backed by $1.7B+ in annual R&amp;D.</div>
         </div>
       </div>
     </div>
@@ -1057,7 +1071,7 @@
           </div>
         </div>
         <div class="reveal" style="margin-top:clamp(14px,2vh,24px); padding:clamp(10px,1.5vh,16px) clamp(14px,2vw,20px); background:var(--accent-dim); border-left:3px solid var(--accent); border-radius:6px;">
-          <p class="slide__body" style="font-size:clamp(13px,1.4vw,15px);">The result: a 16-system SAP stack becomes a 2-platform architecture. Shopify Plus for commerce. Mirakl for marketplace. Everything else connects natively or through a certified app.</p>
+          <p class="slide__body" style="font-size:clamp(13px,1.4vw,15px);">The result: five SAP subscriptions and an Azure microservices layer become a 2-platform architecture. Shopify Plus for commerce. Mirakl for marketplace. Everything else connects natively or through a certified app. With infrastructure reduced to a subscription, Curate can redirect investment entirely toward growth, revenue, and customer experience.</p>
         </div>
       </div>
       <div class="slide__aside reveal">
@@ -1105,7 +1119,7 @@
     <div>
       <p class="slide__label reveal">Proposed Architecture</p>
       <h2 class="slide__heading reveal">Shopify Plus + Mirakl</h2>
-      <p class="slide__subtitle reveal" style="margin-top:12px;">2 platforms replace 16 systems. Native integrations replace custom middleware.</p>
+      <p class="slide__subtitle reveal" style="margin-top:12px;">2 platforms replace 5 SAP subscriptions + Azure. Native integrations replace custom middleware.</p>
     </div>
   </section>
 
@@ -1121,7 +1135,7 @@
       <div class="arch-layer__row">
         <div class="arch-layer__card arch-layer__card--hero" style="border-color:rgba(88,166,255,0.35);">
           <div class="arch-layer__card-title" style="color:#58a6ff;">Shopify Plus Storefront</div>
-          <div class="arch-layer__card-desc">Hydrogen / Liquid rendering with full RTL support for Arabic and English</div>
+          <div class="arch-layer__card-desc">Native Liquid rendering with full RTL support for Arabic and English</div>
           <div class="arch-layer__pills">
             <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Homepage</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Search</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">PLP</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">PDP</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Cart</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Checkout</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Payment</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">MyAccount</span><span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">RTL</span>
           </div>
@@ -1710,43 +1724,44 @@
     <span class="slide__number">07</span>
     <div>
       <p class="slide__label reveal">Delivery Timeline</p>
-      <h2 class="slide__heading reveal">12-Week Implementation</h2>
+      <h2 class="slide__heading reveal">8-9 Week Lift-and-Shift</h2>
       <p class="slide__subtitle reveal" style="margin-top:12px;">Live before SAP contract expiry</p>
     </div>
   </section>
 
   <!-- ═══════════════ SLIDE 23: TIMELINE TABLE ═══════════════ -->
   <section class="slide slide--table">
-    <h2 class="slide__heading reveal" style="margin-bottom:clamp(8px,1.5vh,16px);">Implementation Phases</h2>
+    <h2 class="slide__heading reveal" style="margin-bottom:clamp(4px,0.8vh,8px);">Implementation Phases: Lift-and-Shift Cutover</h2>
+    <p class="slide__body reveal" style="margin-bottom:clamp(8px,1.5vh,14px); font-size:clamp(12px,1.4vw,15px);">An 8-9 week lift-and-shift to meet the SAP deadline. Core commerce and marketplace go live first. Comprehensive UX/UI refinement is delivered post-launch via the GROW retainer, keeping the critical path focused and risk low.</p>
     <div class="table-wrap reveal" style="flex:1; min-height:0;">
       <div class="table-scroll">
         <table class="data-table">
           <thead><tr><th>Phase</th><th>Weeks</th><th>Scope</th><th>Key Deliverables</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>1. Foundation</strong></td><td>1&ndash;3</td>
-              <td>Shopify Plus setup, Mirakl Connector config, Stripe gateway, theme scaffolding</td>
-              <td>Dev store live with Mirakl product sync. Stripe test payments working. Base theme with RTL.</td>
+              <td><strong>1. Foundation</strong></td><td>1&ndash;2</td>
+              <td>Shopify Plus setup, Mirakl Connector config, Stripe gateway, base theme scaffolding with RTL</td>
+              <td>Dev store live with Mirakl product sync. Stripe test payments working. Base theme with RTL support.</td>
             </tr>
             <tr>
-              <td><strong>2. Core Build</strong></td><td>4&ndash;6</td>
-              <td>Storefront build, checkout customisation, 3rd-party POS setup, fulfilment integrations</td>
-              <td>Full storefront with vendor pages. Multi-vendor checkout. Shipa + DHL carriers connected.</td>
+              <td><strong>2. Core Build</strong></td><td>3&ndash;5</td>
+              <td>Functional storefront (lift-and-shift), checkout, 3rd-party POS, fulfilment integrations</td>
+              <td>Functional storefront with vendor pages. Multi-vendor checkout. Shipa + DHL carriers connected.</td>
             </tr>
             <tr>
-              <td><strong>3. Integration</strong></td><td>7&ndash;8</td>
-              <td>Middleware build, analytics, CMS, marketing automation, customer service</td>
-              <td>All integrations live in staging via Shopify Flow. Transactional emails via Shopify Notifications. WhatsApp fulfilment notifications.</td>
+              <td><strong>3. Integration + Migration</strong></td><td>6&ndash;7</td>
+              <td>Integrations via Shopify Flow, data migration, QR redirect mapping, seller training</td>
+              <td>All integrations live. 15K SKUs migrated. 120K customers imported. QR codes redirected.</td>
             </tr>
             <tr>
-              <td><strong>4. Migration</strong></td><td>9&ndash;10</td>
-              <td>Data migration, QR redirect mapping, UAT, seller training</td>
-              <td>15K SKUs migrated. 120K customer accounts imported. QR codes redirected. UAT sign-off.</td>
+              <td><strong>4. Launch</strong></td><td>8&ndash;9</td>
+              <td>UAT, performance testing, DNS cutover, hypercare</td>
+              <td>DNS cutover. SAP decommissioned. Hypercare with dedicated support team.</td>
             </tr>
             <tr>
-              <td><strong>5. Launch</strong></td><td>11&ndash;12</td>
-              <td>Performance testing, soft launch, full cutover, hypercare</td>
-              <td>DNS cutover. SAP decommissioned. 2-week hypercare with dedicated support team.</td>
+              <td><strong>5. UX/UI Refinement</strong></td><td>Post-launch</td>
+              <td>Comprehensive UX/UI design phase delivered via GROW retainer</td>
+              <td>Full design system, conversion optimisation, brand experience refinement, A/B testing programme. Delivered iteratively without disrupting live trading.</td>
             </tr>
           </tbody>
         </table>
@@ -1770,7 +1785,7 @@
       <h2 class="slide__heading" style="font-size:clamp(18px,3vw,28px);">Current State: SAP Commerce Stack</h2>
       <div>
         <span class="compare-stat compare-stat--danger">5 SAP MODULES</span>
-        <span class="compare-stat compare-stat--danger">16 SYSTEMS</span>
+        <span class="compare-stat compare-stat--danger">AZURE MICROSERVICES</span>
       </div>
     </div>
     <div class="arch-layer reveal">
@@ -1886,7 +1901,7 @@
 
       <!-- Danger callout -->
       <div style="display:flex; align-items:center; gap:12px; padding:8px 16px; background:rgba(248,81,73,0.08); border:1.5px solid var(--red); border-radius:8px; align-self:flex-start;">
-        <span style="font-family:var(--font-mono); font-size:clamp(11px,1.1vw,14px); font-weight:700; color:var(--red);">16 Systems / 5 SAP Modules</span>
+        <span style="font-family:var(--font-mono); font-size:clamp(11px,1.1vw,14px); font-weight:700; color:var(--red);">5 SAP Subscriptions + Azure Microservices</span>
         <span style="font-size:clamp(9px,0.9vw,11px); color:var(--red); opacity:0.8;">Each module requires its own domain expertise to operate, configure, and maintain</span>
       </div>
     </div>
@@ -1906,7 +1921,7 @@
       <!-- Row 1: Storefront touchpoints -->
       <div class="arch-layer__row">
         <div class="arch-layer__card" style="flex:3; border-color:rgba(88,166,255,0.25);">
-          <div class="arch-layer__section-label" style="color:#58a6ff;">SHOPIFY PLUS STOREFRONT (HYDROGEN / LIQUID)</div>
+          <div class="arch-layer__section-label" style="color:#58a6ff;">SHOPIFY PLUS STOREFRONT (NATIVE LIQUID)</div>
           <div class="arch-layer__pills">
             <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Homepage</span> <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Search</span> <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">PLP</span> <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">PDP</span>
             <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Cart</span> <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Checkout</span> <span class="arch-layer__pill" style="background:rgba(88,166,255,0.12); color:#58a6ff;">Payment</span>
@@ -2061,7 +2076,7 @@
         <table class="data-table">
           <thead><tr><th>Epic</th><th>Name</th><th>Priority</th><th>Source</th><th>What Delivers It</th></tr></thead>
           <tbody>
-            <tr><td><code>M-001</code></td><td>Marketplace Storefront</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Liquid/Hydrogen themes, responsive storefront, PLP/PDP, navigation, RTL Arabic</td></tr>
+            <tr><td><code>M-001</code></td><td>Marketplace Storefront</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Native Liquid themes, responsive storefront, PLP/PDP, navigation, RTL Arabic</td></tr>
             <tr><td><code>M-002</code></td><td>Multi-Vendor Checkout</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Checkout + Functions for mixed basket, payment splitting via Stripe</td></tr>
             <tr><td><code>M-003</code></td><td>Customer Accounts &amp; Identity</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>New Customer Accounts, login, SSO, order history, saved items. Replaces SAP CDC.</td></tr>
             <tr><td><code>M-004</code></td><td>Search &amp; Discovery</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Search &amp; Discovery (free native app). Faceted filtering, autocomplete, merchandising rules.</td></tr>
@@ -2079,7 +2094,7 @@
             <tr><td><code>M-016</code></td><td>Returns Management</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Returns: customer-initiated returns, inspection workflows, refund processing.</td></tr>
             <tr><td><code>M-017</code></td><td>Promotional Engine</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Discounts + Functions: BOGO, tiered, bundles. Mirakl handles seller-funded promotions.</td></tr>
             <tr><td><code>M-018</code></td><td>Tax &amp; Compliance</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Tax for UAE VAT (5%). Per-item, per-vendor calculation. Invoice generation.</td></tr>
-            <tr><td><code>M-019</code></td><td>POS Integration</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--config">Additional</span></td><td>3rd-party POS (Vend, ConnectPOS, or Hike POS). Shopify POS not available in UAE.</td></tr>
+            <tr><td><code>M-019</code></td><td>POS Integration</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--config">Additional</span></td><td>3rd-party POS (Vend, ConnectPOS, or Hike POS). Shared inventory with online store.</td></tr>
             <tr><td><code>M-020</code></td><td>QR Commerce</td><td class="p1">P1</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify QR codes native. 2,200+ touchpoints rebinding from SAP variant IDs.</td></tr>
             <tr><td><code>M-021</code></td><td>Omnichannel Fulfilment</td><td class="p0">P0</td><td><span class="coverage-source coverage-source--shopify">Shopify Plus</span></td><td>Shopify Fulfillment: location routing, click-and-collect (3rd-party POS/kiosk), Shipa + DHL.</td></tr>
             <tr><td><code>M-022</code></td><td>Hands-Free Shopping</td><td style="color:var(--text-dim);">OPT</td><td><span class="coverage-source coverage-source--config">Phase 2</span></td><td>Optional add-on. Locker integration can be added post-launch via Shopify checkout extensibility.</td></tr>
@@ -2102,25 +2117,25 @@
   <!-- ═══════════════ SLIDE 29: TCO BREAKDOWN ═══════════════ -->
   <section class="slide slide--table" style="padding:clamp(20px,3vh,36px) clamp(20px,3vw,48px);">
     <h2 class="slide__heading reveal" style="margin-bottom:clamp(4px,0.8vh,8px); font-size:clamp(18px,3vw,28px);">Total Cost of Ownership</h2>
-    <p class="slide__body reveal" style="margin-bottom:clamp(8px,1.5vh,14px); font-size:clamp(12px,1.4vw,15px);">Aligned to RFP Section 8 cost categories. All figures in USD. Mirakl licence is an estimate based on typical operator contracts and subject to Curate's renewal terms.</p>
+    <p class="slide__body reveal" style="margin-bottom:clamp(8px,1.5vh,14px); font-size:clamp(12px,1.4vw,15px);">Aligned to RFP Section 8 cost categories. All figures in USD. Mirakl licence is forecast at ~$200K/yr based on Curate's operator tier, subject to Curate's renewal terms.</p>
     <div class="table-wrap reveal" style="flex:1; min-height:0;">
       <div class="table-scroll">
         <table class="data-table tco-table">
           <thead><tr><th>#</th><th>RFP Category</th><th>Year 1</th><th>Year 2-5 (p.a.)</th><th>Notes</th></tr></thead>
           <tbody>
             <tr><td>1a</td><td>Shopify Plus Licence</td><td>$27,600</td><td>$27,600</td><td>$2,300/mo. Includes storefront, checkout, admin, hosting, CDN, SSL, analytics, 99.99% SLA.</td></tr>
-            <tr><td>1b</td><td>Mirakl Platform Licence</td><td>~$90,000</td><td>~$90,000</td><td>Estimate based on typical Mirakl operator contracts. Subject to Curate's renewal terms. Pricing confirmed directly with Mirakl.</td></tr>
+            <tr><td>1b</td><td>Mirakl Platform Licence</td><td>~$200,000</td><td>~$200,000</td><td>Forecast based on Curate's operator tier. Subject to Curate's renewal terms. Pricing confirmed directly with Mirakl.</td></tr>
             <tr><td>1c</td><td>Stripe</td><td>Transaction %</td><td>Transaction %</td><td>No platform licence. Standard processing fee per transaction (2.9% + 30c or negotiated rate).</td></tr>
             <tr><td>1d</td><td>Additional SaaS</td><td>~$12,000</td><td>~$12,000</td><td>3rd-party POS (~$150/mo), marketing tool (~$500/mo), helpdesk (~$300/mo), WhatsApp API (~$50/mo).</td></tr>
-            <tr><td>2</td><td>Implementation &amp; Build</td><td>~$90,000</td><td>-</td><td>12-week programme covering all 32 LOT 1 epics. Theme build, customisation, data migration, and integration development included. (70,000 GBP)</td></tr>
+            <tr><td>2</td><td>Implementation &amp; Build</td><td>~$90,000</td><td>-</td><td>8-9 week lift-and-shift programme covering all 32 LOT 1 epics. Core commerce, data migration, and integration development. Comprehensive UX/UI refinement delivered post-launch via GROW retainer. (70,000 GBP)</td></tr>
             <tr><td>3</td><td>Data Migration</td><td>Included in build</td><td>-</td><td>15K+ SKUs, 120K+ customers, 2,200+ QR bindings, order history. Phased with dual-run period.</td></tr>
             <tr><td>4</td><td>Integration Development</td><td>Included in build</td><td>-</td><td>11 LOT 1 integration points. 6 native (Stripe, Flow, Notifications, GA4, Shipa, DHL) + 1 operator connector with custom Shopify app (Mirakl) + 4 certified apps (Klaviyo, Gorgias, Zoho, WhatsApp).</td></tr>
             <tr><td>5</td><td>Hosting &amp; Infrastructure</td><td>Included in Shopify Plus</td><td>Included in Shopify Plus</td><td>Shopify Plus hosting is included in the platform licence. No separate hosting cost. Custom app hosting ~$50/mo.</td></tr>
             <tr><td>6</td><td>Post-Launch Partnership (GROW)</td><td>~$108,000 (7 months)</td><td>~$185,000</td><td>~$15,400/mo (12,000 GBP/mo). Embedded ecommerce expertise: hypercare, trading enablement, feature enhancements, CRO, omni-channel fulfilment, and personalisation. Starts June post-launch.</td></tr>
             <tr><td>7</td><td>Training &amp; Knowledge Transfer</td><td>Included in build</td><td>-</td><td>Admin training, video library, documentation, API guides, runbooks, disaster recovery procedures.</td></tr>
             <tr><td>8</td><td>Contingency</td><td>10-15% of build</td><td>-</td><td>Buffer for scope adjustments, unforeseen complexity, and third-party API changes.</td></tr>
-            <tr class="tco-row--subtotal"><td>9</td><td>Year 1 TCO</td><td>~$338,000</td><td>-</td><td>Platform ($130K) + Build ($90K) + GROW retainer from June ($108K) + contingency (~$10K). Hosting included in Shopify Plus.</td></tr>
-            <tr class="tco-row--subtotal"><td>10</td><td>Year 2-5 Annual Run Cost</td><td>-</td><td>~$317,000</td><td>Platform: Shopify Plus ($27,600) + Mirakl (~$90,000) + SaaS ($14,400) = $132K. GROW retainer ($185K). No SAP renewal. No infrastructure team.</td></tr>
+            <tr class="tco-row--subtotal"><td>9</td><td>Year 1 TCO</td><td>~$448,000</td><td>-</td><td>Platform ($240K) + Build ($90K) + GROW retainer from June ($108K) + contingency (~$10K). Hosting included in Shopify Plus.</td></tr>
+            <tr class="tco-row--subtotal"><td>10</td><td>Year 2-5 Annual Run Cost</td><td>-</td><td>~$427,000</td><td>Platform: Shopify Plus ($27,600) + Mirakl (~$200,000) + SaaS ($14,400) = ~$242K. GROW retainer ($185K). No SAP renewal. No infrastructure team.</td></tr>
           </tbody>
         </table>
       </div>
@@ -2138,10 +2153,10 @@
         <div class="reveal" style="display:flex; flex-direction:column; gap:clamp(12px,2vh,20px);">
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
-              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">60%+</span>
+              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">~50%</span>
               <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">TCO REDUCTION</span>
             </div>
-            <p class="slide__body" style="font-size:13px;">From five separate SAP modules + Azure hosting to 1 Shopify Plus subscription. Platform, CDN, SSL, and hosting included.</p>
+            <p class="slide__body" style="font-size:13px;">From five separate SAP modules + Azure hosting to 1 Shopify Plus subscription. Platform, CDN, SSL, and hosting included. The savings freed up are reinvested in growth.</p>
           </div>
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
@@ -2152,10 +2167,10 @@
           </div>
           <div style="padding:clamp(14px,2vh,20px); background:var(--surface); border:1px solid var(--border); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
-              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--blue);">12 wks</span>
-              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">TO GO LIVE</span>
+              <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--blue);">8-9 wks</span>
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">LIFT-AND-SHIFT CUTOVER</span>
             </div>
-            <p class="slide__body" style="font-size:13px;">Live before SAP contract expiry. Phased rollout with zero-downtime cutover protecting 120K+ customer accounts.</p>
+            <p class="slide__body" style="font-size:13px;">Live before SAP contract expiry. Core commerce and marketplace migrated, with comprehensive UX/UI refinement delivered post-launch via the GROW retainer.</p>
           </div>
         </div>
         <div class="reveal" style="display:flex; flex-direction:column; gap:clamp(12px,2vh,20px);">
@@ -2176,7 +2191,7 @@
           <div style="padding:clamp(14px,2vh,20px); background:var(--accent-dim); border:1px solid var(--border-bright); border-radius:8px;">
             <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
               <span style="font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); font-weight:700; color:var(--accent-bright);">150+</span>
-              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">UPDATES / YEAR</span>
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); letter-spacing:1px;">UPDATES / EDITION</span>
             </div>
             <p class="slide__body" style="font-size:13px;">Shopify Editions ships twice a year. Agentic storefronts, AI tools, checkout improvements, and new APIs arrive automatically. No upgrade projects. No end-of-life deadlines. Ever.</p>
           </div>
@@ -2205,7 +2220,7 @@
             <div style="font-size:clamp(12px,1.1vw,13px); color:var(--text);">SEO migration and cutover governance</div>
           </div>
           <div style="margin-top:clamp(12px,1.5vh,18px); padding-top:clamp(10px,1.5vh,14px); border-top:1px solid var(--border);">
-            <span style="font-family:var(--font-mono); font-size:clamp(10px,0.9vw,12px); color:var(--text-dim); letter-spacing:1px;">12 WEEKS &middot; FIXED DELIVERY &middot; LIVE 4 JUNE</span>
+            <span style="font-family:var(--font-mono); font-size:clamp(10px,0.9vw,12px); color:var(--text-dim); letter-spacing:1px;">8-9 WEEKS &middot; LIFT-AND-SHIFT &middot; LIVE 4 JUNE</span>
           </div>
         </div>
         <div style="padding:clamp(16px,2vh,24px); background:var(--accent-dim); border:1px solid var(--border-bright); border-radius:8px; border-top:3px solid var(--accent);">
@@ -2227,6 +2242,7 @@
       </div>
       <div class="reveal" style="margin-top:clamp(14px,2vh,22px); padding:clamp(10px,1.5vh,16px) clamp(12px,1.5vw,18px); background:var(--surface2); border-radius:6px; border-left:3px solid var(--accent);">
         <span style="font-weight:700; color:var(--accent);">Why this matters:</span> <span style="color:var(--text-dim); font-size:clamp(12px,1.2vw,14px);">Senior Shopify, CRO, and marketplace expertise embedded in the Curate team for a fraction of the cost of hiring internally. No post-go-live drop-off. No learning curve. The same team that builds the platform stays to grow the business.</span>
+        <br><br><span style="font-weight:700; color:var(--green);">Mirakl incentive:</span> <span style="color:var(--text-dim); font-size:clamp(12px,1.2vw,14px);">Should a new Mirakl Operator Connector build be required, this can be included within the project scope, provided Curate commits to a 12-month GROW retainer at the quoted value.</span>
       </div>
     </div>
   </section>
@@ -2279,6 +2295,55 @@
       </div>
       <div class="reveal" style="margin-top:clamp(10px,1.5vh,16px); padding:clamp(8px,1vh,12px) clamp(12px,1.5vw,18px); background:var(--surface2); border-radius:6px; border-left:3px solid var(--amber);">
         <span style="font-weight:700; color:var(--amber);">Continuous throughout:</span> <span style="color:var(--text-dim); font-size:clamp(11px,1.1vw,13px);">Bug fixes, security patches, performance optimisation, A/B testing, and feature enhancements. Defined SLAs: P0 1hr, P1 4hr, P2 24hr response.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 30c: THE COMMERCIAL CASE ═══════════════ -->
+  <section class="slide slide--content" style="background-image:radial-gradient(ellipse at 50% 50%, var(--accent-dim) 0%, transparent 50%);">
+    <div style="max-width:960px;">
+      <p class="slide__label reveal">The Commercial Case</p>
+      <h2 class="slide__heading reveal" style="margin-bottom:clamp(6px,1vh,10px);">Every dirham spent keeping the lights on is a dirham not spent on growth</h2>
+      <p class="slide__subtitle reveal" style="margin-top:0; margin-bottom:clamp(20px,3vh,32px); max-width:760px; font-size:clamp(12px,1.2vw,14px); line-height:1.6; opacity:0.7;">SAP Commerce Cloud requires dedicated infrastructure engineers, separate subscriptions for every module, and custom development for features Shopify Plus ships as standard. That spend does not generate revenue. It maintains the status quo.</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:clamp(14px,2vw,24px);" class="reveal">
+        <!-- Card 1: Stop -->
+        <div style="padding:clamp(18px,2.5vh,28px) clamp(16px,2vw,22px); background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--red);">
+          <div style="font-family:var(--font-mono); font-size:clamp(10px,0.9vw,12px); letter-spacing:2px; color:var(--red); margin-bottom:clamp(10px,1.5vh,16px);">STOP PAYING FOR</div>
+          <div style="display:flex; flex-direction:column; gap:clamp(8px,1vh,12px); font-size:clamp(12px,1.1vw,13px); color:var(--text);">
+            <div>5 separate SAP subscriptions</div>
+            <div>Azure hosting and infrastructure management</div>
+            <div>Custom development for standard commerce features</div>
+            <div>Upgrade projects and end-of-life migrations</div>
+            <div>Dedicated infrastructure engineers</div>
+          </div>
+        </div>
+        <!-- Card 2: Start -->
+        <div style="padding:clamp(18px,2.5vh,28px) clamp(16px,2vw,22px); background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--green);">
+          <div style="font-family:var(--font-mono); font-size:clamp(10px,0.9vw,12px); letter-spacing:2px; color:var(--green); margin-bottom:clamp(10px,1.5vh,16px);">START INVESTING IN</div>
+          <div style="display:flex; flex-direction:column; gap:clamp(8px,1vh,12px); font-size:clamp(12px,1.1vw,13px); color:var(--text);">
+            <div>Conversion rate optimisation and A/B testing</div>
+            <div>Personalisation, loyalty, and repeat purchase</div>
+            <div>Omni-channel fulfilment and endless aisle</div>
+            <div>Vendor acquisition and marketplace growth</div>
+            <div>Customer experience and brand storytelling</div>
+          </div>
+        </div>
+        <!-- Card 3: Cost of inaction -->
+        <div style="padding:clamp(18px,2.5vh,28px) clamp(16px,2vw,22px); background:var(--accent-dim); border:1px solid var(--border-bright); border-top:3px solid var(--accent);">
+          <div style="font-family:var(--font-mono); font-size:clamp(10px,0.9vw,12px); letter-spacing:2px; color:var(--accent-bright); margin-bottom:clamp(10px,1.5vh,16px);">COST OF STANDING STILL</div>
+          <div style="display:flex; flex-direction:column; gap:clamp(8px,1vh,12px); font-size:clamp(12px,1.1vw,13px); color:var(--text);">
+            <div>SAP contract renewal locks in another cycle</div>
+            <div>150+ Shopify platform updates per edition, missed</div>
+            <div>Competitors on modern stacks iterate faster</div>
+            <div>Engineering budget absorbed by maintenance</div>
+            <div>Growth initiatives perpetually deprioritised</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:clamp(18px,2.5vh,28px); padding:clamp(12px,1.5vh,18px) clamp(16px,2vw,22px); background:var(--surface2); border-left:3px solid var(--accent);">
+        <span style="font-size:clamp(13px,1.3vw,15px); color:var(--text); line-height:1.6;">Shopify Plus eliminates the infrastructure tax. The ~$427K annual run cost covers platform, marketplace, and an embedded growth team. No SAP renewals. No Azure bills. No upgrade projects. Every dirham goes toward revenue, not maintenance.</span>
       </div>
     </div>
   </section>
